@@ -39,8 +39,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .tool em{font-style:normal;font-size:10px;color:var(--acc);white-space:nowrap;font-family:var(--mono)}
 .tool.on{border-color:var(--acc);background:#2b2616;box-shadow:inset 0 -2px 0 var(--acc)}
 .tool.na{opacity:.42}
+.tool.sep{margin-left:10px}
+.tb:disabled{opacity:.4;cursor:default}
 .tool kbd{position:absolute;top:2px;left:4px;font-size:9px;color:#5c636c;font-family:var(--mono)}
-#toasts{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none;width:min(560px,92%)}
+#toasts{position:absolute;top:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:4px;align-items:center;pointer-events:none;width:min(560px,92%)}
 .toast{background:#0b0c0ef0;padding:6px 12px;border-radius:3px;font-size:12px;border:1px solid #2a2e34;border-left:3px solid var(--dim);transition:opacity .5s;text-align:center;font-family:var(--mono)}
 .toast.bad{border-left-color:var(--red)}.toast.good{border-left-color:var(--ok)}.toast.warn{border-left-color:var(--acc)}.toast.info{border-left-color:var(--blue)}.toast.mut{border-left-color:#d58cff}
 #hint{position:absolute;left:10px;bottom:8px;font-size:11px;background:#0b0c0ee0;border:1px solid #23262b;padding:4px 9px;border-radius:3px;pointer-events:none;max-width:calc(100% - 20px);font-family:var(--mono)}
@@ -57,6 +59,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 #info .acts button.danger{border-color:#6e2a30;color:#ff9b9b}
 #info .note{font-size:11px;color:var(--dim);margin-top:7px}
 @media (max-width:640px){
+  #mini{display:none}#news{font-size:10px}
   #info{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:55%;overflow:auto}
   #top{gap:3px 6px;font-size:11px}.chip{padding:2px 5px;gap:3px}.chip i{font-size:8px;letter-spacing:0}.bar{width:56px}
   .toast{font-size:10px;padding:4px 8px}.toast:nth-last-child(n+3){display:none}
@@ -65,7 +68,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 }
 #ov{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:10;padding:12px}
 #ov.show{display:flex}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 24px;width:min(680px,100%);max-height:94%;overflow:auto;touch-action:pan-y;box-shadow:0 10px 50px #000}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 24px;width:min(780px,100%);max-height:94%;overflow:auto;touch-action:pan-y;box-shadow:0 10px 50px #000}
 .panel h1{font:800 40px/1 var(--mono);letter-spacing:8px;color:var(--fg);margin-bottom:6px}
 .panel h1 em{font-style:normal;color:var(--red)}
 .panel h2{font:700 20px var(--mono);letter-spacing:2px;margin-bottom:10px;text-transform:uppercase;text-wrap:balance}
@@ -89,6 +92,21 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .achl b{display:block;font:700 12px var(--mono);margin-bottom:2px}.achl span{font-size:11px;color:var(--dim)}
 .loglist{font:12px/1.5 var(--mono);max-height:50vh;overflow:auto;margin:8px 0;border:1px solid var(--line);border-radius:4px;padding:6px 10px;background:#0b0c0e}
 .loglist div{border-bottom:1px dashed #1f2226;padding:2px 0}.loglist i{font-style:normal;color:var(--dim);margin-right:8px}
+#news{position:absolute;left:0;right:0;top:0;height:22px;background:#0b0c0ee8;border-bottom:1px solid #23262b;overflow:hidden;font:11px/22px var(--mono);color:#c9ced4;white-space:nowrap;pointer-events:none}
+#news b{position:absolute;left:0;top:0;bottom:0;z-index:1;background:var(--red);color:#111;padding:0 8px;letter-spacing:2px}
+#newsT{display:inline-block;padding-left:100%}
+@keyframes news{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+#mini{position:absolute;left:10px;top:32px;width:220px;height:134px;border:1px solid #2d3137;border-radius:3px;background:#0b0c0e;cursor:pointer;touch-action:none}
+#tut{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:min(480px,92%);background:#15171bf5;border:1px solid var(--acc);border-radius:6px;padding:12px 14px;box-shadow:0 8px 30px #000a}
+#tut .tt{font:700 11px var(--mono);letter-spacing:2px;color:var(--acc)}#tut p{margin:6px 0 2px;font-size:13px;line-height:1.5}#tut .big{padding:6px 12px;font-size:11px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin:12px 0}
+.mode{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.mode>b{font:700 13px var(--mono);letter-spacing:1px;text-transform:uppercase}.mode>span{font-size:12px;color:var(--dim);flex:1}
+.mode .lv{display:flex;flex-wrap:wrap;gap:4px}.mode .big{margin:4px 0 0;align-self:flex-start}
+.row2{display:flex;flex-wrap:wrap;gap:0 6px}
+.upl{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;margin:10px 0}
+.upl div{background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:9px;display:flex;flex-direction:column;gap:4px}
+.upl div.got{border-color:var(--acc)}.upl b{font:700 12px var(--mono)}.upl span{font-size:11px;color:var(--dim);flex:1}.upl .tb{align-self:flex-start}
 #chart{width:100%;height:auto;background:#0b0c0e;border:1px solid #23262b;border-radius:3px;margin:4px 0 6px;display:block}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style>
@@ -107,13 +125,17 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
     <button class="tb spd" data-s="2">2×</button>
     <button class="tb spd" data-s="4">4×</button>
     <button class="tb" id="bRestart" title="Перезапустить уровень">↻</button>
+    <button class="tb" id="bMusic" title="Музыка">🎵</button>
     <button class="tb" id="bSound" title="Звук">🔊</button>
     <button class="tb" id="bMenu" title="Меню (Esc)">☰</button>
   </div>
 </div>
 <div id="wrap">
   <canvas id="cv"></canvas>
+  <div id="news"><b>ЭФИР</b><span id="newsT"></span></div>
+  <canvas id="mini" width="220" height="134" hidden></canvas>
   <div id="toasts"></div>
+  <div id="tut" hidden></div>
   <div id="hint"></div>
   <div id="legend"></div>
   <div id="info" hidden></div>
@@ -171,7 +193,7 @@ const Snd={
       this.noise=b;this.master=this.ctx.createGain();this.master.gain.value=0.45;this.master.connect(this.ctx.destination);
     }catch(e){this.ctx=null;}
   },
-  gap:{scream:0.8,gun:0.06,sniper:0.25,heli:2,wall:0.15,alarm:1.5,boom:0.3,nuke:2,click:0.03,bite:0.12,good:0.4,bad:0.3,iso:0.2,mut:1,scan:0.3},
+  gap:{fire:0.15,scream:0.8,gun:0.06,sniper:0.25,heli:2,wall:0.15,alarm:1.5,boom:0.3,nuke:2,click:0.03,bite:0.12,good:0.4,bad:0.3,iso:0.2,mut:1,scan:0.3},
   play(name){
     if(!this.on||!this.ctx||this.ctx.state!=='running')return;
     const t=this.ctx.currentTime;
@@ -205,6 +227,32 @@ const Snd={
   s_iso(t){this.tone(t,0.08,1000,1200,'sine',0.06);},
   s_mut(t){this.tone(t,0.5,90,180,'sawtooth',0.06);this.tone(t+0.1,0.5,95,190,'sawtooth',0.05);},
   s_scan(t){this.tone(t,0.25,1500,600,'sine',0.06);},
+  s_fire(t){this.nz(t,0.35,700,'lowpass',0.22);},
+  // ----- музыка: низкий гул и редкие удары, напряжение растёт вместе с эпидемией -----
+  musOn:true,mus:null,
+  startMusic(){
+    if(!this.ctx||this.mus)return;const c=this.ctx,g=c.createGain(),f=c.createBiquadFilter();
+    g.gain.value=0;g.connect(this.master);f.type='lowpass';f.frequency.value=380;f.connect(g);
+    const o1=c.createOscillator(),o2=c.createOscillator(),lfo=c.createOscillator(),lg=c.createGain();
+    o1.type=o2.type='sawtooth';o1.frequency.value=55;o2.frequency.value=55.7;o1.connect(f);o2.connect(f);
+    lfo.frequency.value=0.07;lg.gain.value=140;lfo.connect(lg);lg.connect(f.frequency);o1.start();o2.start();lfo.start();
+    g.gain.linearRampToValueAtTime(0.05,c.currentTime+3);this.mus={g,f,o1,o2,lfo,next:c.currentTime+1};
+  },
+  stopMusic(){
+    const m=this.mus;if(!m)return;this.mus=null;const t=this.ctx.currentTime;
+    m.g.gain.cancelScheduledValues(t);m.g.gain.setValueAtTime(m.g.gain.value,t);m.g.gain.linearRampToValueAtTime(0,t+1);
+    setTimeout(()=>{try{m.o1.stop();m.o2.stop();m.lfo.stop();}catch(e){}},1300);
+  },
+  musicTick(k){
+    const m=this.mus;if(!m)return;const t=this.ctx.currentTime;
+    m.f.frequency.setTargetAtTime(320+k*1200,t,1.5);
+    const notes=[220,261.6,293.7,329.6,392,440];
+    while(m.next<t+0.3){
+      const iv=1.4-k*0.85;this.tone(m.next,0.28,72,36,'sine',0.1+k*0.12);
+      if(Math.random()<0.3+k*0.3){const f=notes[Math.random()*notes.length|0]*(k>0.6&&Math.random()<0.35?1.06:1);this.tone(m.next+iv/2,1.9,f,f*0.995,'triangle',0.022);}
+      m.next+=iv;
+    }
+  },
   s_scream(t){this.tone(t,0.6,700,1400,'sawtooth',0.05);this.nz(t,0.5,2500,'bandpass',0.12);}
 };
 
@@ -278,7 +326,7 @@ const L1=(()=>{
   const W=1800,H=1100,MR=3,MW=Math.ceil(W/MR),MH=Math.ceil(H/MR),NM=MW*MH;
   const HL=0,I1=1,I2=2,ACT=3,LATE=4,DEAD=5,ISO=6,ESC=7;   // здоров, скрытая инкубация, симптомы, активный, поздний, мёртв, изолирован, бежал
   const NCIV=2000,MAXA=2700,SPH=4;                         // SPH — реальных секунд в игровом часе при 1×
-  const COST={swat:700,turret:350,sniper:250,heli:400,bar:35,checkpoint:200,test:150,medic:300,curfew:200,station:80};
+  const COST={drone:200,flame:500,hosp:600,siren:250,swat:700,turret:350,sniper:250,heli:400,bar:35,checkpoint:200,test:150,medic:300,curfew:200,station:80};
   const DNAMES=['ДОКИ','СТАРЫЙ ГОРОД','РЫНОК','СОБОРНЫЙ','ЦЕНТР','ФАБРИЧНЫЙ','УНИВЕРСИТЕТ','НАБЕРЕЖНАЯ','НОВЫЙ КВАРТАЛ','ВОКЗАЛЬНЫЙ'];
   const SNAMES=['Северная','Площадь Свободы','Университет','Старый порт','Центральная','Вокзал','Набережная','Собор','Промзона'];
   const LINES=[{name:'Красная',c:'#e0524b',st:[3,4,5]},{name:'Зелёная',c:'#5cc46a',st:[1,4,7]},{name:'Жёлтая',c:'#e3b844',st:[0,1,2]},{name:'Синяя',c:'#4f8fe0',st:[6,7,8]}];
@@ -292,11 +340,13 @@ const L1=(()=>{
   const ARR={ax,ay,aspd,atimer,astage,ahp,alane,acd,athink,aent,amark,aride,apanic,astuck,amw,azx,azy,ast,atype,amode,aflag,azk,an0,an1,adest,aplace,ahome,awork,apass,acp,aex,ain,aqd,atgt};
   // режимы: 0 идёт, 1 в здании, 2 в метро, 3 в очереди, 4 паника, 5 гуляет, 6 путь перекрыт, 7 зомби идёт на шум
   // флаги: 1 иммунитет, 2 помечен тестом, 4 труп встанет
-  let NA=0,S=null;
+  let NA=0,S=null,lightsCv=null;
+  const WICON={clear:'☀',rain:'🌧',fog:'🌫',heat:'🔥'};
+  const fogK=()=>S.weather==='fog'?0.65:1,heatK=()=>S.weather==='heat'?1.25:1;
 
   // ----- город -----
   let NN=0,nx,ny,adj,nodeB,isExit,NE=0,ea,eb,elen,ew,ek,eblock,ecp;
-  let Bd=[],P=[],D=[],ST=[],mDist=null,parks=[],coastWp=[],coastSp=[],blvd=null;
+  let Bd=[],P=[],D=[],ST=[],mDist=null,mPath=null,parks=[],coastWp=[],coastSp=[],blvd=null;
   let baseMask,mask,barAt,nearNode,mapCv=null,fields=[],budget=0,bOcc,bInc,nodeD;
   let coastW,coastS,isWater;
   const free=(x,y)=>x>=0&&y>=0&&x<W&&y<H&&mask[(y/MR|0)*MW+(x/MR|0)]===1;
@@ -410,6 +460,11 @@ const L1=(()=>{
     for(const d of D){if(d.n){d.x/=d.n;d.y/=d.n;}else{d.x=d.sx;d.y=d.sy;}}
     // места назначения: здания, парки, выезды
     P=[];nodeB=Array.from({length:NN},()=>[]);
+    for(const b of Bd){
+      const px=nx[b.node],py=ny[b.node],q=b.pts;let bd=1e9;
+      for(let k=0;k<4;k++){const ax_=q[k*2],ay_=q[k*2+1],bx_=q[(k*2+2)%8],by_=q[(k*2+3)%8],[d,t]=distSeg(px,py,ax_,ay_,bx_,by_);
+        if(d<bd){bd=d;const x=ax_+(bx_-ax_)*t,y=ay_+(by_-ay_)*t,l=Math.hypot(px-x,py-y)||1;b.dx=x+(px-x)/l*1.5;b.dy=y+(py-y)/l*1.5;}}
+    }
     Bd.forEach((b,k)=>{b.place=P.length;P.push({kind:'bld',node:b.node,b:k,x:b.cx,y:b.cy,district:b.district});nodeB[b.node].push(k);});
     for(const p of parks){p.place=P.length;P.push({kind:'park',node:p.node,b:-1,x:p.cx,y:p.cy,district:0});}
     for(let v=0;v<NN;v++)if(isExit[v])P.push({kind:'exit',node:v,b:-1,x:nx[v],y:ny[v],district:0});
@@ -425,7 +480,9 @@ const L1=(()=>{
     LINES.forEach((l,li)=>l.st.forEach(s=>ST[s].lines.push(li)));
     mDist=Array.from({length:9},(_,a)=>Array.from({length:9},(_,b)=>a===b?0:1e9));
     for(const l of LINES)for(let k=0;k+1<l.st.length;k++){const a=l.st[k],b=l.st[k+1],d=Math.hypot(ST[a].x-ST[b].x,ST[a].y-ST[b].y);mDist[a][b]=mDist[b][a]=d;}
-    for(let k=0;k<9;k++)for(let a=0;a<9;a++)for(let b=0;b<9;b++)if(mDist[a][k]+mDist[k][b]<mDist[a][b])mDist[a][b]=mDist[a][k]+mDist[k][b];
+    const mNext=Array.from({length:9},(_,a)=>Array.from({length:9},(_,b)=>mDist[a][b]<1e8?b:-1));
+    for(let k=0;k<9;k++)for(let a=0;a<9;a++)for(let b=0;b<9;b++)if(mDist[a][k]+mDist[k][b]<mDist[a][b]){mDist[a][b]=mDist[a][k]+mDist[k][b];mNext[a][b]=mNext[a][k];}
+    mPath=Array.from({length:9},(_,a)=>Array.from({length:9},(_,b)=>{const out=[a];let c=a,g=0;while(c!==b&&c>=0&&g++<12){c=mNext[c][b];if(c>=0)out.push(c);}return out;}));
     // береговая линия для отрисовки
     coastWp=[];for(let y=-20;y<=H+20;y+=8)coastWp.push([coastW(y),y]);
     coastSp=[];for(let x=-20;x<=W+20;x+=8)coastSp.push([x,coastS(x)]);
@@ -556,8 +613,8 @@ const L1=(()=>{
   }
   function leaveQueue(i){if(amode[i]!==3)return;const c=S.cps[acp[i]];if(c){const q=c.q[aqd[i]],k=q.indexOf(i);if(k>=0)q.splice(k,1);}amode[i]=0;}
   function turnActive(i){
-    if(amode[i]===1){const b=ain[i];bOcc[b]--;bInc[b]-=amw[i];ain[i]=-1;const n=Bd[b].node;ax[i]=nx[n]+rnd(-3,3);ay[i]=ny[n]+rnd(-3,3);}
-    else if(amode[i]===2){S.mR--;S.mC-=amw[i];const n=ST[aex[i]].node;ax[i]=nx[n];ay[i]=ny[n];}
+    if(amode[i]===1){const b=ain[i];bOcc[b]--;bInc[b]-=amw[i];ain[i]=-1;ax[i]=Bd[b].dx;ay[i]=Bd[b].dy;}
+    else if(amode[i]===2){S.mR--;S.mC-=amw[i];const[x,y]=metroPos(i);ax[i]=x;ay[i]=y;}
     leaveQueue(i);
     ast[i]=ACT;astage[i]=rnd(45,70);ahp[i]=1;aspd[i]=rnd(30,37)*(Strain.has('runners')?1.25:1)*Dif().zspd;acd[i]=0;atgt[i]=-1;amode[i]=0;an1[i]=-1;aflag[i]&=~2;azk[i]=0;
     if(S.t>150&&atype[i]===0){const q=Math.random()/Math.sqrt(Dif().inf);if(q<0.04){azk[i]=1;atimer[i]=rnd(3,6);firstKind(1);}else if(q<0.07){azk[i]=2;ahp[i]=8;aspd[i]*=0.7;firstKind(2);}}
@@ -591,7 +648,7 @@ const L1=(()=>{
   }
   function fx(k,x,y,x2,y2){
     if(S.fx.length>500)S.fx.shift();
-    const m={scream:1.2,tr:0.08,laser:0.25,blood:8,iso:0.8,boom:0.6,drop:0.6,scan:1.2,rise:1}[k]||0.5;
+    const m={fire:0.4,cure:1,scream:1.2,tr:0.08,laser:0.25,blood:8,iso:0.8,boom:0.6,drop:0.6,scan:1.2,rise:1}[k]||0.5;
     S.fx.push({k,x,y,x2,y2,t:m,m});
   }
 
@@ -632,33 +689,41 @@ const L1=(()=>{
   function leaveBuilding(i){
     const b=ain[i];
     if(b===ahome[i]&&D[Bd[b].district].curfew){atimer[i]=2*SPH;return;}  // комендантский час
+    if(b===ahome[i]&&S.weather==='rain'&&Math.random()<0.3){atimer[i]=rnd(1,2)*SPH;return;}
     if(b===ahome[i]&&S.zVis>10&&Math.random()<Math.min(0.75,S.zVis/50)){atimer[i]=rnd(1.5,3)*SPH;return;}  // люди прячутся по домам
-    if(ast[i]===HL){const other=bInc[b];if(other>0){const stay=S.time-aent[i];if(Math.random()<1-Math.exp(-0.3*airK()*Dif().inf*other*stay/Math.max(4,bOcc[b])))infect(i,'bld');}}
+    if(ast[i]===HL){const other=bInc[b];if(other>0){const stay=S.time-aent[i];if(Math.random()<1-Math.exp(-0.3*airK()*Dif().inf*heatK()*other*stay/Math.max(4,bOcc[b])))infect(i,'bld');}}
     const next=nextPlace(i,b);
     bOcc[b]--;bInc[b]-=amw[i];ain[i]=-1;
-    const n=Bd[b].node;ax[i]=nx[n]+rnd(-2,2);ay[i]=ny[n]+rnd(-2,2);an0[i]=an1[i]=n;
-    goTo(i,next);
+    const n=Bd[b].node;ax[i]=Bd[b].dx;ay[i]=Bd[b].dy;an0[i]=an1[i]=n;
+    goTo(i,next);if(amode[i]===0)amode[i]=9;
   }
   function arrive(i){
     const p=P[aplace[i]];
     if(aex[i]>=0&&an0[i]!==p.node){ // доехали до станции отправления
       const sa=ST.findIndex(s=>s.node===an0[i]);
       if(sa>=0&&!ST[sa].closed&&!ST[aex[i]].closed){
-        amode[i]=2;aride[i]=mDist[sa][aex[i]]/260+2;amw[i]=wOf(i);S.mR++;S.mC+=amw[i];aent[i]=S.t;return;
+        amode[i]=2;aride[i]=mDist[sa][aex[i]]/260+2;azx[i]=aride[i];acp[i]=sa;amw[i]=wOf(i);S.mR++;S.mC+=amw[i];aent[i]=S.t;return;
       }
       aex[i]=-1;adest[i]=p.node;return;
     }
-    if(p.kind==='bld')enterBuilding(i,p.b);
+    if(p.kind==='bld'){amode[i]=8;}
     else if(p.kind==='park'){amode[i]=5;atimer[i]=rnd(0.4,1.2)*SPH;afx(i,p);}
     else{ // выехал из города
       if(ast[i]===I1||ast[i]===I2)S.leak++;
       ast[i]=ESC;amode[i]=0;S.stats.escaped++;
     }
   }
+  function metroPos(i){
+    const path=mPath[acp[i]][aex[i]],tot=mDist[acp[i]][aex[i]]||1;
+    let dist=clamp((S.t-aent[i]-1)/Math.max(0.5,azx[i]-2),0,1)*tot;
+    for(let k=0;k+1<path.length;k++){const a=ST[path[k]],b=ST[path[k+1]],l=Math.hypot(b.x-a.x,b.y-a.y);
+      if(dist<=l||k+2===path.length){const t=clamp(dist/(l||1),0,1);return[lerp(a.x,b.x,t),lerp(a.y,b.y,t)];}dist-=l;}
+    return[ST[aex[i]].x,ST[aex[i]].y];
+  }
   function exitMetro(i){
     const sb=aex[i],n=ST[sb].node;S.mR--;S.mC-=amw[i];
-    if(ast[i]===HL){const ride=S.t-aent[i];if(Math.random()<1-Math.exp(-0.22*airK()*Dif().inf*Math.max(0,S.mC)*ride/Math.max(15,S.mR+1)))infect(i,'metro');}
-    ax[i]=nx[n]+rnd(-3,3);ay[i]=ny[n]+rnd(-3,3);an0[i]=an1[i]=n;aex[i]=-1;amode[i]=0;adest[i]=P[aplace[i]].node;
+    if(ast[i]===HL){const ride=S.t-aent[i];if(Math.random()<1-Math.exp(-0.22*airK()*Dif().inf*heatK()*Math.max(0,S.mC)*ride/Math.max(15,S.mR+1)))infect(i,'metro');}
+    ax[i]=nx[n];ay[i]=ny[n];an0[i]=an1[i]=n;aex[i]=-1;amode[i]=0;adest[i]=P[aplace[i]].node;
   }
   function closeContact(i){
     const r=(ast[i]===I2?7:5)*Math.sqrt(airK()),p=(ast[i]===I2?0.012:0.004)*airK()*Dif().inf;
@@ -696,8 +761,11 @@ const L1=(()=>{
     if(m===5){atimer[i]-=dt;if(atimer[i]<=0){an1[i]=an0[i];goTo(i,Bd[ahome[i]].place);}
       else{const p=P[aplace[i]];if(Math.random()<dt)afx(i,p);steerFree(i,azx[i],azy[i],aspd[i]*0.35,dt);}return;}
     if(m===6){atimer[i]-=dt;if(atimer[i]<=0){amode[i]=0;}return;}
+    if(m===8){const b=P[aplace[i]].b,B=Bd[b];if(stepTo(i,B.dx,B.dy,dt))enterBuilding(i,b);return;}
+    if(m===9){const v=an1[i];if(stepTo(i,nx[v],ny[v],dt))amode[i]=0;return;}
     walk(i,dt);
   }
+  function stepTo(i,tx,ty,dt){const dx=tx-ax[i],dy=ty-ay[i],d=Math.hypot(dx,dy),st=aspd[i]*dt;if(d<=st){ax[i]=tx;ay[i]=ty;return true;}ax[i]+=dx/d*st;ay[i]+=dy/d*st;return false;}
   function afx(i,p){azx[i]=p.x+rnd(-22,22);azy[i]=p.y+rnd(-22,22);}
   function walk(i,dt){
     if(!moveToNode(i,dt,1))return;
@@ -726,7 +794,7 @@ const L1=(()=>{
     const nm=S.night?1.15:1,sp=aspd[i]*nm;
     if(athink[i]<=0){
       athink[i]=0.3+Math.random()*0.2;
-      atgt[i]=nearestL(ax[i],ay[i],(ast[i]===ACT?50:32)*(S.night?1.25:1),0);
+      atgt[i]=nearestL(ax[i],ay[i],(ast[i]===ACT?50:32)*(S.night?1.25:1)*(S.weather==='rain'?0.75:1),0);
       if(atgt[i]<0&&amode[i]!==7){const R0=Strain.has('horde')?230:130;for(const n of S.noise){const R=n.big?280:R0;if((n.x-ax[i])**2+(n.y-ay[i])**2<R*R){amode[i]=7;azx[i]=n.x+rnd(-15,15);azy[i]=n.y+rnd(-15,15);break;}}}
     }
     const j=atgt[i];let blk=-1;
@@ -758,19 +826,19 @@ const L1=(()=>{
   // ===================== ПОЛИЦИЯ И САНИТАРЫ =====================
   function updPolice(i,dt){
     acd[i]-=dt;athink[i]-=dt;
-    if(athink[i]<=0){athink[i]=0.25;atgt[i]=nearestZ(ax[i],ay[i],170);if(atgt[i]<0)atgt[i]=-2-Math.max(-1,nearestL(ax[i],ay[i],220,1));}
+    if(athink[i]<=0){athink[i]=0.25;atgt[i]=nearestZ(ax[i],ay[i],170*fogK());if(atgt[i]<0)atgt[i]=-2-Math.max(-1,nearestL(ax[i],ay[i],220,1));}
     const j=atgt[i];
     if(j>=0&&(ast[j]===ACT||ast[j]===LATE)){
       const dx=ax[j]-ax[i],dy=ay[j]-ay[i],d=Math.hypot(dx,dy)||1;
       const sw=atype[i]===3;
-      if(d<(sw?95:75)){if(acd[i]<=0){acd[i]=sw?0.55:0.85;shoot(ax[i],ay[i],j,(ast[j]===ACT?0.7:0.55)+(sw?0.2:0),1,'police');}if(d<18)moveFree(i,-dx/d*aspd[i]*0.8*dt,-dy/d*aspd[i]*0.8*dt);}
+      if(d<(sw?95:75)*fogK()){if(acd[i]<=0){acd[i]=sw?0.55:0.85;shoot(ax[i],ay[i],j,(ast[j]===ACT?0.7:0.55)+(sw?0.2:0),1,'police');}if(d<18)moveFree(i,-dx/d*aspd[i]*0.8*dt,-dy/d*aspd[i]*0.8*dt);}
       else navTo(i,ax[j],ay[j],dt,aspd[i]);
       return;
     }
     const m=j<=-2?-2-j:-1;
     if(m>=0&&(aflag[m]&2)&&isOut(m)&&ast[m]<ACT){ // арест помеченного носителя
       const d=navTo(i,ax[m],ay[m],dt,aspd[i]);
-      if(d<6){leaveQueue(m);ast[m]=ISO;aflag[m]&=~2;S.stats.arrested++;S.money+=20;fx('iso',ax[m],ay[m]);Snd.play('iso');atgt[i]=-1;}
+      if(d<6){leaveQueue(m);aflag[m]&=~2;S.stats.arrested++;S.money+=20;fx('iso',ax[m],ay[m]);Snd.play('iso');if(!tryCure(m))ast[m]=ISO;atgt[i]=-1;}
       return;
     }
     wanderGraph(i,dt,aspd[i]*0.5);
@@ -790,6 +858,57 @@ const L1=(()=>{
     wanderGraph(i,dt,aspd[i]*0.6);
   }
 
+  // ===================== ВОЛНЫ, ДРОНЫ, ОГНЕМЁТЧИКИ, ГОСПИТАЛЬ =====================
+  function nextWave(){
+    S.wave++;S.waveT=rnd(110,140);S.cleared=false;
+    const k=1+Math.floor(S.wave*0.7);let n=0;
+    for(let t=0;t<800&&n<k;t++){const i=Math.random()*NA|0;if(atype[i]===0&&ast[i]===HL&&!(aflag[i]&1)&&infect(i,'wave'))n++;}
+    if(S.wave%2===0)Strain.add();
+    toast(`🌊 Волна ${S.wave}: с беженцами в город попали ${n} носителей. Они выглядят здоровыми`,'bad');Snd.play('alarm');
+  }
+  function updDrones(dt){
+    for(const d of S.drones){
+      d.t-=dt;const dx=d.tx-d.x,dy=d.ty-d.y,l=Math.hypot(dx,dy);
+      if(l>3){const st=Math.min(l,140*dt);d.x+=dx/l*st;d.y+=dy/l*st;}
+      else{d.a+=dt;d.scan-=dt;
+        if(d.scan<=0){d.scan=1;eachNear(d.tx,d.ty,60,j=>{const s=ast[j];if((s===I1||s===I2)&&!(aflag[j]&2)){const p=(s===I2?0.6:0.22)*(silent()?0.6:1)+0.05*upL('tests');if(Math.random()<p){aflag[j]|=2;amark[j]=45;S.stats.droneMarks=(S.stats.droneMarks||0)+1;}}});}}
+    }
+    if(S.drones.some(d=>d.t<=0))S.drones=S.drones.filter(d=>d.t>0);
+  }
+  // госпиталь лечит пойманного носителя: на ранней стадии почти всегда, с симптомами — реже
+  function tryCure(i){
+    if(!S.hospN)return false;
+    const p=ast[i]===I1?0.85:0.45+0.1*upL('medic');
+    if(Math.random()<p){ast[i]=HL;aflag[i]|=1;aflag[i]&=~2;S.stats.cured=(S.stats.cured||0)+1;S.money+=40;fx('cure',ax[i],ay[i]);return true;}
+    return false;
+  }
+  function updFlame(i,dt){
+    acd[i]-=dt;athink[i]-=dt;
+    if(athink[i]<=0){athink[i]=0.3;atgt[i]=nearestZ(ax[i],ay[i],170*fogK());
+      if(atgt[i]<0){let best=-1,bd=260*260;for(const[k]of S.risers){if(!(aflag[k]&4))continue;const d=(ax[k]-ax[i])**2+(ay[k]-ay[i])**2;if(d<bd){bd=d;best=k;}}atgt[i]=best>=0?-2-best:-1;}}
+    const j=atgt[i];
+    if(j>=0&&(ast[j]===ACT||ast[j]===LATE)){const d=Math.hypot(ax[j]-ax[i],ay[j]-ay[i]);if(d<30){if(acd[i]<=0){acd[i]=0.45;burn(ax[i],ay[i],ax[j],ay[j]);}}else navTo(i,ax[j],ay[j],dt,aspd[i]);return;}
+    const c=j<=-2?-2-j:-1;
+    if(c>=0&&(aflag[c]&4)){const d=navTo(i,ax[c],ay[c],dt,aspd[i]);if(d<12){burn(ax[i],ay[i],ax[c],ay[c]);atgt[i]=-1;}return;}
+    wanderGraph(i,dt,aspd[i]*0.5);
+  }
+  // огонь бьёт по площади: зомби, трупы, которые могли встать, — и, увы, случайные прохожие
+  function burn(x,y,tx,ty){
+    fx('fire',tx,ty,x,y);Snd.play('fire');noise(x,y);
+    for(let k=0;k<NA;k++){
+      if((ax[k]-tx)**2+(ay[k]-ty)**2>196)continue;const s=ast[k];
+      if(s===ACT||s===LATE)hitZombie(k,1.5);
+      else if(s===DEAD&&(aflag[k]&4)){aflag[k]&=~4;S.stats.collected++;}
+      else if(s<ACT&&atype[k]===0&&isOut(k)&&Math.random()<0.12){kill(k,false);S.stats.friendly++;}
+    }
+  }
+  function siren(){
+    if(S.sirenCD>0){toast(`Сирена перезаряжается: ${Math.ceil(S.sirenCD)} с`,'warn');return;}
+    if(!spend(S,COST.siren))return;let n=0;
+    for(let i=0;i<NA;i++){if(atype[i]!==0||ast[i]>=ACT)continue;const m=amode[i];if(m===1||m===2||ahome[i]<0)continue;leaveQueue(i);amode[i]=0;goTo(i,Bd[ahome[i]].place);n++;}
+    S.sirenCD=60;S.rally=null;toast(`📢 Сирена: ${n} человек на улицах идут по домам`,'info');Snd.play('alarm');
+  }
+
   // ===================== СЛУЧАЙНЫЕ СОБЫТИЯ =====================
   function cityEvent(){
     const r=Math.random();
@@ -804,8 +923,8 @@ const L1=(()=>{
   // ===================== ОБОРОНА =====================
   function updDefense(dt){
     for(const b of Bd){
-      if(b.turret&&!(S.blackout>0)){b.cd-=dt;if(b.cd<=0){const z=nearestZ(b.cx,b.cy,120);if(z>=0){b.cd=0.13;b.ang=Math.atan2(ay[z]-b.cy,ax[z]-b.cx);shoot(b.cx,b.cy,z,0.45,1,'turret');}else b.cd=0.2;}}
-      if(b.sniper){b.scd-=dt;if(b.scd<=0){const z=nearestZ(b.cx,b.cy,280);if(z>=0){b.scd=2.2;b.sang=Math.atan2(ay[z]-b.cy,ax[z]-b.cx);shoot(b.cx,b.cy,z,0.96,3,'sniper');}else b.scd=0.3;}}
+      if(b.turret&&!(S.blackout>0)){b.cd-=dt;if(b.cd<=0){const z=nearestZ(b.cx,b.cy,120*fogK());if(z>=0){b.cd=0.13/(1+0.2*upL('turret'));b.ang=Math.atan2(ay[z]-b.cy,ax[z]-b.cx);shoot(b.cx,b.cy,z,0.45,1,'turret');}else b.cd=0.2;}}
+      if(b.sniper){b.scd-=dt;if(b.scd<=0){const z=nearestZ(b.cx,b.cy,280*fogK());if(z>=0){b.scd=2.2;b.sang=Math.atan2(ay[z]-b.cy,ax[z]-b.cx);shoot(b.cx,b.cy,z,0.96,3,'sniper');}else b.scd=0.3;}}
     }
     for(const c of S.cps){
       if(!c)continue;
@@ -818,8 +937,8 @@ const L1=(()=>{
           c.proc[d]+=dt;
           if(c.proc[d]>=1.1){
             c.proc[d]=0;q.shift();
-            const det=ast[f]===I2?(silent()?0.55:0.8):ast[f]===I1?(silent()?0.1:0.2):0;
-            if(Math.random()<det){ast[f]=ISO;amode[f]=0;S.stats.caught++;S.money+=25;fx('iso',ax[f],ay[f]);Snd.play('iso');}
+            const det0=ast[f]===I2?(silent()?0.55:0.8):ast[f]===I1?(silent()?0.1:0.2):0,det=det0>0?det0+0.08*upL('tests'):0;
+            if(Math.random()<det){S.stats.caught++;S.money+=25;fx('iso',ax[f],ay[f]);Snd.play('iso');if(!tryCure(f))ast[f]=ISO;amode[f]=0;}
             else{apass[f]=c.id;amode[f]=0;}
           }
         }
@@ -830,7 +949,7 @@ const L1=(()=>{
     }
     for(const h of S.helis){
       if(h.ph===0){const dx=h.tx-h.x,dy=h.ty-h.y,d=Math.hypot(dx,dy);h.a=Math.atan2(dy,dx);if(d<4){h.ph=1;h.t=1.4;}else{const s=Math.min(d,240*dt);h.x+=dx/d*s;h.y+=dy/d*s;}}
-      else if(h.ph===1){h.t-=dt;if(!h.dropped&&h.t<0.9){h.dropped=true;for(let k=0;k<(h.unit===3?5:6);k++)spawnUnit(h.unit||1,h.tx+rnd(-8,8),h.ty+rnd(-8,8));fx('drop',h.x,h.y);}if(h.t<=0)h.ph=2;}
+      else if(h.ph===1){h.t-=dt;if(!h.dropped&&h.t<0.9){h.dropped=true;for(let k=0;k<(h.unit===3?5:h.unit===4?3:6+upL('heli'));k++)spawnUnit(h.unit||1,h.tx+rnd(-8,8),h.ty+rnd(-8,8));fx('drop',h.x,h.y);}if(h.t<=0)h.ph=2;}
       else{const dx=-80-h.x,dy=-80-h.y,d=Math.hypot(dx,dy);h.a=Math.atan2(dy,dx);if(d<5)h.dead=true;else{const s=Math.min(d,260*dt);h.x+=dx/d*s;h.y+=dy/d*s;}}
     }
     S.helis=S.helis.filter(h=>!h.dead);
@@ -838,7 +957,7 @@ const L1=(()=>{
   function spawnUnit(type,x,y){
     if(NA>=MAXA)return -1;const i=newAgent(type,x,y);
     const n=nodeAt(x,y);ax[i]=nx[n]+rnd(-4,4);ay[i]=ny[n]+rnd(-4,4);an0[i]=-1;an1[i]=n;
-    aspd[i]=type===2?rnd(26,30):rnd(30,36);return i;
+    aspd[i]=type===2?rnd(26,30)*(1+0.15*upL('medic')):type===4?rnd(26,31):rnd(30,36);return i;
   }
   function newAgent(type,x,y){
     const i=NA++;for(const k in ARR)ARR[k][i]=0;
@@ -855,14 +974,14 @@ const L1=(()=>{
       if(S.bars.some(o=>o&&o.e===e)||ecp[e]>=0)continue;
       if(S.money<COST.bar)break;S.money-=COST.bar;
       const ang=Math.atan2(ny[eb[e]]-ny[ea[e]],nx[eb[e]]-nx[ea[e]])+Math.PI/2;
-      S.bars.push({e,x,y,ang,len:ew[e]+9,hp:60});eblock[e]++;n++;
+      const bh=60*(1+0.4*upL('bars'));S.bars.push({e,x,y,ang,len:ew[e]+9,hp:bh,mhp:bh});eblock[e]++;n++;
       for(let i=0;i<NA;i++){if(atype[i]===0&&amode[i]!==1&&amode[i]!==2&&ast[i]<ACT&&edgeBetween(an0[i]>=0?an0[i]:an1[i],an1[i])===e){const t=an0[i];an0[i]=an1[i];an1[i]=t>=0?t:an1[i];}}
     }
     if(!n){toast('Проведите линию поперёк улицы (нужно $'+COST.bar+' за баррикаду)','warn');return;}
     rebuildMask();invalidate();Snd.play('wall');toast(`🧱 Баррикады: ${n} ($${n*COST.bar})`,'info');
   }
   function damageBar(id,dmg){const b=S.bars[id];if(!b)return;b.hp-=dmg;if(b.hp<=0)removeBar(id,true);}
-  function removeBar(id,broken){const b=S.bars[id];if(!b)return;eblock[b.e]--;S.bars[id]=null;rebuildMask();invalidate();fx('boom',b.x,b.y);if(broken)toast('🧱 Зомби проломили баррикаду','warn');}
+  function removeBar(id,broken){const b=S.bars[id];if(!b)return;if(broken)App.shake=Math.max(App.shake,4);eblock[b.e]--;S.bars[id]=null;rebuildMask();invalidate();fx('boom',b.x,b.y);if(broken)toast('🧱 Зомби проломили баррикаду','warn');}
   function nearestEdge(x,y,r){let best=-1,bd=r,bt=0;for(let e=0;e<NE;e++){const[d,t]=distSeg(x,y,nx[ea[e]],ny[ea[e]],nx[eb[e]],ny[eb[e]]);if(d<bd){bd=d;best=e;bt=t;}}return[best,bt];}
   function makeCp(w){
     const[e,t0]=nearestEdge(w.x,w.y,16);
@@ -886,9 +1005,9 @@ const L1=(()=>{
     bOcc=new Int32Array(Bd.length);bInc=new Float32Array(Bd.length);invalidate();
     S.shops=Bd.map((b,k)=>b.type==='shop'?k:-1).filter(k=>k>=0);
   }
-  function init(){
-    NA=0;
-    S={seed:(Math.random()*1e9)|0,time:6,t:0,money:1500,alert:false,zSeen:0,zVis:0,cps:[],bars:[],helis:[],fx:[],noise:[],risers:[],leak:0,mR:0,mC:0,mutT:0,
+  function init(opts){
+    opts=opts||{};NA=0;
+    S={opts,seed:opts.seed||((Math.random()*1e9)|0),time:opts.night?20:6,t:0,money:Math.round(1500*(opts.rich?2:1)*upK()),weather:opts.fog?'fog':'clear',wave:opts.endless?1:0,waveT:150,drones:[],sirenCD:0,hospN:0,incomeK:opts.poor?0.6:1,lockMetro:!!opts.nometro,alert:false,zSeen:0,zVis:0,cps:[],bars:[],helis:[],fx:[],noise:[],risers:[],leak:0,mR:0,mC:0,mutT:0,
       sel:null,stats:{killed:0,caught:0,arrested:0,friendly:0,infected:0,unitsLost:0,escaped:0,collected:0,risen:0},cnt:{},night:false};
     gen(S.seed);setup();
     const homes=[],jobs=[];Bd.forEach((b,k)=>{const a=Math.max(1,Math.round(b.area/60));if(b.type==='house')for(let q=0;q<a;q++)homes.push(k);else for(let q=0;q<a;q++)jobs.push(k);});
@@ -901,18 +1020,22 @@ const L1=(()=>{
     countPop();
     let p0;do{p0=Math.random()*NCIV|0;}while(aflag[p0]&1);
     ast[p0]=I1;astage[p0]=rnd(55,70);aflag[p0]|=8;amw[p0]=wOf(p0);bInc[ain[p0]]+=amw[p0];S.stats.infected=1;
+    if(opts.twozero){let p1;do{p1=Math.random()*NCIV|0;}while(p1===p0||(aflag[p1]&1));ast[p1]=I1;astage[p1]=rnd(40,60);amw[p1]=wOf(p1);bInc[ain[p1]]+=amw[p1];S.stats.infected++;}
+    if(opts.nometro)ST.forEach(s=>s.closed=true);
+    if(opts.mutant){Strain.add();Strain.add();}
+    if(opts.crowd&&parks.length)S.rally={place:parks[0].place,t:60};
     const pol=Bd.find(b=>b.type==='police')||Bd[0];
     for(let k=0;k<8;k++)spawnUnit(1,nx[pol.node],ny[pol.node]);
     renderMap();update(0.0001);
   }
   function save(){
     const a={};for(const k in ARR)a[k]=Array.from(ARR[k].subarray(0,NA),v=>Math.round(v*100)/100);
-    return{seed:S.seed,time:S.time,t:S.t,money:S.money,alert:S.alert,zSeen:S.zSeen,leak:S.leak,mutT:S.mutT,stats:S.stats,NA,a,risers:S.risers,
+    return{opts:S.opts,weather:S.weather,wave:S.wave,waveT:S.waveT,incomeK:S.incomeK,lockMetro:S.lockMetro,seed:S.seed,time:S.time,t:S.t,money:S.money,alert:S.alert,zSeen:S.zSeen,leak:S.leak,mutT:S.mutT,stats:S.stats,NA,a,risers:S.risers,
       bars:S.bars.filter(Boolean).map(b=>[b.e,b.hp]),cps:S.cps.filter(Boolean).map(c=>[c.e,c.t,c.hp]),
-      bt:Bd.map(b=>(b.turret?1:0)|(b.sniper?2:0)),st:ST.map(s=>s.closed?1:0),cf:D.map(d=>d.curfew?1:0)};
+      bt:Bd.map(b=>(b.turret?1:0)|(b.sniper?2:0)|(b.hosp?4:0)),st:ST.map(s=>s.closed?1:0),cf:D.map(d=>d.curfew?1:0)};
   }
   function load(d){
-    S={seed:d.seed,time:d.time,t:d.t,money:d.money,alert:d.alert,zSeen:d.zSeen,zVis:0,cps:[],bars:[],helis:[],fx:[],noise:[],risers:d.risers||[],leak:d.leak,mR:0,mC:0,mutT:d.mutT||0,sel:null,stats:d.stats,cnt:{},night:false};
+    S={opts:d.opts||{},weather:d.weather||'clear',wave:d.wave||0,waveT:d.waveT||150,drones:[],sirenCD:0,hospN:0,incomeK:d.incomeK||1,lockMetro:!!d.lockMetro,seed:d.seed,time:d.time,t:d.t,money:d.money,alert:d.alert,zSeen:d.zSeen,zVis:0,cps:[],bars:[],helis:[],fx:[],noise:[],risers:d.risers||[],leak:d.leak,mR:0,mC:0,mutT:d.mutT||0,sel:null,stats:d.stats,cnt:{},night:false};
     gen(S.seed);setup();
     NA=d.NA;for(const k in ARR){const src=d.a[k];if(src)ARR[k].set(src.slice(0,NA));}
     for(let i=0;i<NA;i++){
@@ -922,7 +1045,7 @@ const L1=(()=>{
     }
     for(const[e,hp]of d.bars){const ang=Math.atan2(ny[eb[e]]-ny[ea[e]],nx[eb[e]]-nx[ea[e]])+Math.PI/2;S.bars.push({e,x:(nx[ea[e]]+nx[eb[e]])/2,y:(ny[ea[e]]+ny[eb[e]])/2,ang,len:ew[e]+9,hp});eblock[e]++;}
     for(const[e,t,hp]of d.cps){const id=S.cps.length;S.cps.push({id,e,t,x:lerp(nx[ea[e]],nx[eb[e]],t),y:lerp(ny[ea[e]],ny[eb[e]],t),ang:Math.atan2(ny[eb[e]]-ny[ea[e]],nx[eb[e]]-nx[ea[e]]),q:[[],[]],proc:[0,0],hp,cd:0});ecp[e]=id;}
-    d.bt.forEach((f,k)=>{if(Bd[k]){Bd[k].turret=f&1;Bd[k].sniper=f&2?1:0;}});
+    d.bt.forEach((f,k)=>{if(Bd[k]){Bd[k].turret=f&1;Bd[k].sniper=f&2?1:0;Bd[k].hosp=f&4?1:0;if(f&4)S.hospN++;}});
     d.st.forEach((f,k)=>{if(ST[k])ST[k].closed=!!f;});d.cf.forEach((f,k)=>{if(D[k])D[k].curfew=!!f;});
     countPop();rebuildMask();renderMap();update(0.0001);
   }
@@ -930,7 +1053,13 @@ const L1=(()=>{
   // ===================== ГЛАВНЫЙ ШАГ =====================
   function update(dt){
     S.t+=dt;S.time+=dt/SPH;budget=25;S.night=night();
-    buildGrids();
+    const day=Math.floor((S.time-6)/24);
+    if(day!==S.day){if(S.day!==undefined&&!S.opts.fog){const r=Math.random();S.weather=r<0.45?'clear':r<0.7?'rain':r<0.85?'fog':'heat';
+      toast({clear:'☀ Новый день: ясно',rain:'🌧 Ливень: зомби хуже чуют добычу, люди сидят по домам',fog:'🌫 Туман: дальность турелей, снайперов и отрядов −35%',heat:'🔥 Жара: в зданиях и метро вирус передаётся на 25% легче'}[S.weather],'info');}S.day=day;}
+    if(S.opts.sandbox)S.money=Math.max(S.money,99999);
+    if(S.sirenCD>0)S.sirenCD-=dt;
+    if(S.opts.endless&&S.t>5){S.waveT-=dt;if(S.waveT<=0)nextWave();}
+    buildGrids();updDrones(dt);
     for(const r of S.risers){r[1]-=dt;if(r[1]<=0){const i=r[0];if(ast[i]===DEAD&&(aflag[i]&4)){aflag[i]&=~4;ast[i]=LATE;ahp[i]=Strain.has('tough')?5:3;aspd[i]=rnd(10,14);an1[i]=-1;amode[i]=0;S.stats.risen++;fx('rise',ax[i],ay[i]);}r[2]=1;}}
     if(S.risers.length&&S.risers.some(r=>r[2]))S.risers=S.risers.filter(r=>!r[2]);
     for(let i=0;i<NA;i++){
@@ -941,6 +1070,7 @@ const L1=(()=>{
       else if(s===ACT){astage[i]-=dt;if(astage[i]<=0){ast[i]=LATE;ahp[i]=Math.max(ahp[i],Strain.has('tough')?5:3);aspd[i]=rnd(10,14)*(azk[i]===2?0.85:1);s=LATE;}}
       if(s===ACT||s===LATE)updZombie(i,dt);
       else if(atype[i]===1||atype[i]===3)updPolice(i,dt);
+      else if(atype[i]===4)updFlame(i,dt);
       else if(atype[i]===2)updMedic(i,dt);
       else updCiv(i,dt);
     }
@@ -955,7 +1085,8 @@ const L1=(()=>{
     }
     S.cnt=c;S.zVis=c.act+c.late;
     let upk=0;for(const d of D)if(d.curfew)upk+=3;
-    S.money+=dt*((4+(c.h+c.i1+c.i2)/280)*Dif().money-upk);
+    S.money+=dt*((4+(c.h+c.i1+c.i2)/280)*Dif().money*S.incomeK*upK()-upk);
+    if(S.opts.endless&&!S.cleared&&S.t>10&&c.i1+c.i2+c.act+c.late+c.risers===0){S.cleared=true;const v=Math.round(800*upK());S.money+=v;toast(`🛡 Волна ${S.wave} отбита! Премия $${v}. Следующая скоро`,'good');Snd.play('good');S.waveT=Math.min(S.waveT,25);}
     if(S.money<0){S.money=0;const d=D.find(d=>d.curfew);if(d){d.curfew=false;toast(`💸 Нет денег: комендантский час в районе «${d.name}» снят`,'bad');}}
     if(S.alert){S.mutT+=dt;if(S.mutT>80*Dif().mut){S.mutT=0;Strain.add();}S.evT=(S.evT??90)-dt;if(S.evT<=0){S.evT=rnd(90,130);cityEvent();}}
     if(S.blackout>0)S.blackout-=dt;if(S.rally){S.rally.t-=dt;if(S.rally.t<=0){S.rally=null;toast('Митинг разошёлся','info');}}
@@ -964,6 +1095,7 @@ const L1=(()=>{
   }
   const lossFrac=()=>(S.cnt.civDead+S.cnt.civZ)/NCIV;
   function result(){
+    if(S.opts.endless)return lossFrac()>=0.7?'lose':null;
     if(lossFrac()>=0.5)return 'lose';
     const c=S.cnt;if(S.t>5&&c.i1+c.i2+c.act+c.late+c.risers===0)return 'win';
     return null;
@@ -1005,6 +1137,13 @@ const L1=(()=>{
       if(b.type==='hospital'){g.fillStyle='#e8eef2';g.fillRect(b.cx-1.5,b.cy-5,3,10);g.fillRect(b.cx-5,b.cy-1.5,10,3);}
       if(b.type==='police'){g.fillStyle='#9cc4ff';g.beginPath();g.moveTo(b.cx,b.cy-5);g.lineTo(b.cx+4.5,b.cy);g.lineTo(b.cx,b.cy+5);g.lineTo(b.cx-4.5,b.cy);g.closePath();g.fill();}
     }
+    // огни окон — отдельный слой, проявляется ночью
+    lightsCv=document.createElement('canvas');lightsCv.width=mapCv.width;lightsCv.height=mapCv.height;
+    const lg=lightsCv.getContext('2d');lg.scale(sc,sc);
+    for(const b of Bd){const n=Math.max(1,Math.round(b.area/(b.type==='house'?90:140)));
+      for(let k=0;k<n;k++){if(r()<0.35)continue;const u=0.15+r()*0.7,v=0.15+r()*0.7,p=b.pts;
+        const x=lerp(lerp(p[0],p[2],u),lerp(p[6],p[4],u),v),y=lerp(lerp(p[1],p[3],u),lerp(p[7],p[5],u),v);
+        lg.fillStyle=r()<0.8?'#ffd27a':'#bfe3ff';lg.fillRect(x-0.9,y-0.9,1.8,1.8);}}
     // виньетка
     const vg=g.createRadialGradient(W/2,H/2,H*0.4,W/2,H/2,H*1.05);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,0.45)');g.fillStyle=vg;g.fillRect(0,0,W,H);
   }
@@ -1052,7 +1191,7 @@ const L1=(()=>{
       if(!b)continue;ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.ang);
       ctx.fillStyle='#8f2b35';ctx.strokeStyle='#d0606a';ctx.lineWidth=1;
       ctx.beginPath();ctx.roundRect?ctx.roundRect(-b.len/2,-2.6,b.len,5.2,2):ctx.rect(-b.len/2,-2.6,b.len,5.2);ctx.fill();ctx.stroke();
-      if(b.hp<60){ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(-b.len/2,-2.6,b.len*(1-b.hp/60),5.2);}
+      const mh=b.mhp||60;if(b.hp<mh){ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(-b.len/2,-2.6,b.len*(1-b.hp/mh),5.2);}
       ctx.restore();
     }
     // чекпоинты
@@ -1070,12 +1209,20 @@ const L1=(()=>{
         ctx.fillStyle='#e8b84a';ctx.beginPath();for(let k=0;k<6;k++){const a=k*Math.PI/3;ctx.lineTo(b.cx+Math.cos(a)*6,b.cy+Math.sin(a)*6);}ctx.closePath();ctx.fill();
         ctx.strokeStyle='#1a1a1a';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(b.cx,b.cy);ctx.lineTo(b.cx+Math.cos(b.ang)*9,b.cy+Math.sin(b.ang)*9);ctx.stroke();
       }
+      if(b.hosp){poly(ctx,b.pts);ctx.fillStyle='rgba(240,245,250,0.22)';ctx.fill();ctx.strokeStyle='#e8eef2';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#ff5a64';ctx.fillRect(b.cx-1.6,b.cy-5,3.2,10);ctx.fillRect(b.cx-5,b.cy-1.6,10,3.2);}
       if(b.sniper){const a=b.sang;ctx.fillStyle='#5ea8ff';ctx.beginPath();ctx.moveTo(b.cx+Math.cos(a)*6,b.cy+Math.sin(a)*6);ctx.lineTo(b.cx+Math.cos(a+2.4)*4,b.cy+Math.sin(a+2.4)*4);ctx.lineTo(b.cx+Math.cos(a-2.4)*4,b.cy+Math.sin(a-2.4)*4);ctx.closePath();ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=0.7;ctx.stroke();}
     }
     // ночь
     const h=hour();let nt=0;if(h>=20.5||h<5)nt=0.38;else if(h>=18.5)nt=(h-18.5)/2*0.38;else if(h<7)nt=(7-h)/2*0.38;
     if(nt>0){ctx.fillStyle=`rgba(4,8,22,${nt})`;ctx.fillRect(0,0,W,H);}
     if(S.blackout>0){ctx.fillStyle='rgba(0,0,0,0.38)';ctx.fillRect(0,0,W,H);}
+    else if(nt>0&&lightsCv){ctx.globalAlpha=Math.min(0.9,nt*2.2);ctx.drawImage(lightsCv,0,0,W,H);ctx.globalAlpha=1;}
+    // погода
+    if(S.weather==='rain'){ctx.fillStyle='rgba(20,30,50,0.16)';ctx.fillRect(0,0,W,H);ctx.strokeStyle='rgba(170,195,230,0.28)';ctx.lineWidth=0.8;ctx.beginPath();
+      for(let k=0;k<320;k++){const x=(k*137.5+S.t*30)%W,y=(k*91.3+S.t*520)%H;ctx.moveTo(x,y);ctx.lineTo(x-3,y+12);}ctx.stroke();}
+    else if(S.weather==='fog'){ctx.fillStyle='rgba(150,160,170,0.16)';ctx.fillRect(0,0,W,H);
+      for(let k=0;k<7;k++){const x=((k*311+S.t*8)%(W+400))-200,y=(k*173)%H,gr=ctx.createRadialGradient(x,y,0,x,y,260);gr.addColorStop(0,'rgba(170,178,186,0.2)');gr.addColorStop(1,'rgba(170,178,186,0)');ctx.fillStyle=gr;ctx.fillRect(x-260,y-260,520,520);}}
+    else if(S.weather==='heat'){ctx.fillStyle='rgba(255,140,60,0.05)';ctx.fillRect(0,0,W,H);}
     if(S.rally){const p=P[S.rally.place],k=(S.t*1.5)%1;ctx.strokeStyle=`rgba(232,184,74,${1-k})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,10+k*34,0,7);ctx.stroke();}
     // кровь
     for(const f of S.fx)if(f.k==='blood'){ctx.fillStyle=`rgba(140,20,30,${0.55*f.t/f.m})`;ctx.fillRect(f.x-2,f.y-2,4,4);}
@@ -1085,6 +1232,7 @@ const L1=(()=>{
     const vis=i=>amode[i]!==1&&amode[i]!==2;
     batch('#4d5157',i=>ast[i]===DEAD,1.3);
     batch('#efefef',i=>atype[i]===0&&ast[i]<ACT&&vis(i),sz);
+    ctx.fillStyle='#c4ccd4';ctx.beginPath();for(let i=0;i<NA;i++)if(amode[i]===2&&ast[i]<ACT){const[x,y]=metroPos(i);ctx.rect(x-sz*0.8+alane[i]*0.6,y-sz*0.8+alane[i]*0.4,sz*1.6,sz*1.6);}ctx.fill();
     // едва заметный красный ободок у носителей с симптомами
     if(!silent()||Math.random()<0.5){ctx.strokeStyle='rgba(255,90,100,0.33)';ctx.lineWidth=0.7;ctx.beginPath();
       for(let i=0;i<NA;i++)if(ast[i]===I2&&vis(i)){ctx.moveTo(ax[i]+2.9,ay[i]);ctx.arc(ax[i],ay[i],2.9,0,6.2832);}ctx.stroke();}
@@ -1093,6 +1241,7 @@ const L1=(()=>{
     batch('#ff8a8a',i=>ast[i]===ACT,sz+0.15);
     batch('#d13b48',i=>ast[i]===LATE,sz+0.45);
     batch('#7cd84a',i=>atype[i]===3&&ast[i]<ACT,sz+0.5);
+    batch('#ff9a3c',i=>atype[i]===4&&ast[i]<ACT,sz+0.5);
     for(let i=0;i<NA;i++){const k=azk[i];if(!k||(ast[i]!==ACT&&ast[i]!==LATE))continue;
       if(k===2){ctx.fillStyle='#8e1622';ctx.fillRect(ax[i]-3.3,ay[i]-3.3,6.6,6.6);ctx.strokeStyle='#ff8a8a';ctx.lineWidth=0.8;ctx.strokeRect(ax[i]-3.3,ay[i]-3.3,6.6,6.6);}
       else{const ph=(S.t*1.5+i*0.37)%1;ctx.strokeStyle=`rgba(255,138,208,${1-ph})`;ctx.lineWidth=1;ctx.beginPath();ctx.arc(ax[i],ay[i],3+ph*8,0,7);ctx.stroke();ctx.fillStyle='#ff8ad0';ctx.fillRect(ax[i]-2,ay[i]-2,4,4);}}
@@ -1104,10 +1253,19 @@ const L1=(()=>{
       if(f.k==='tr'){ctx.strokeStyle=`rgba(255,226,140,${k})`;ctx.lineWidth=0.8;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(f.x2,f.y2);ctx.stroke();}
       else if(f.k==='laser'){ctx.strokeStyle=`rgba(140,190,255,${k})`;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(f.x2,f.y2);ctx.stroke();}
       else if(f.k==='iso'){ctx.strokeStyle=`rgba(95,227,207,${k})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(f.x,f.y,4+(1-k)*10,0,7);ctx.stroke();}
+      else if(f.k==='fire'){ctx.strokeStyle=`rgba(255,160,60,${k})`;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(f.x2,f.y2);ctx.lineTo(f.x,f.y);ctx.stroke();ctx.fillStyle=`rgba(255,${120+80*k|0},40,${k*0.75})`;ctx.beginPath();ctx.arc(f.x,f.y,6+(1-k)*9,0,7);ctx.fill();}
+      else if(f.k==='cure'){ctx.strokeStyle=`rgba(95,211,138,${k})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(f.x,f.y,4+(1-k)*12,0,7);ctx.stroke();}
       else if(f.k==='scream'){ctx.strokeStyle=`rgba(255,138,208,${k*0.7})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(f.x,f.y,(1-k)*140,0,7);ctx.stroke();}
       else if(f.k==='scan'){ctx.strokeStyle=`rgba(242,201,76,${k})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(f.x,f.y,80*(1-k*0.7),0,7);ctx.stroke();}
       else if(f.k==='rise'){ctx.strokeStyle=`rgba(209,59,72,${k})`;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(f.x,f.y,3+(1-k)*8,0,7);ctx.stroke();}
       else if(f.k==='boom'||f.k==='drop'){ctx.strokeStyle=f.k==='boom'?`rgba(255,150,60,${k})`:`rgba(140,190,255,${k})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(f.x,f.y,5+(1-k)*16,0,7);ctx.stroke();}
+    }
+    // дроны-сканеры
+    for(const d of S.drones){
+      const hov=Math.hypot(d.tx-d.x,d.ty-d.y)<4,hx=d.x+(hov?Math.cos(d.a*2)*10:0),hy=d.y+(hov?Math.sin(d.a*2)*10:0);
+      if(hov){ctx.strokeStyle='rgba(242,201,76,0.35)';ctx.setLineDash([3,4]);ctx.lineWidth=1;ctx.beginPath();ctx.arc(d.tx,d.ty,60,0,7);ctx.stroke();ctx.setLineDash([]);}
+      ctx.strokeStyle='#f2c94c';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(hx-4,hy-4);ctx.lineTo(hx+4,hy+4);ctx.moveTo(hx+4,hy-4);ctx.lineTo(hx-4,hy+4);ctx.stroke();
+      ctx.fillStyle='#f2c94c';for(const[ox,oy]of[[-4,-4],[4,4],[4,-4],[-4,4]]){ctx.beginPath();ctx.arc(hx+ox,hy+oy,1.7,0,7);ctx.fill();}
     }
     // станции метро
     ctx.font=`600 9px ${MONO}`;
@@ -1124,7 +1282,7 @@ const L1=(()=>{
     for(const hl of S.helis){
       ctx.save();ctx.translate(hl.x,hl.y);ctx.rotate(hl.a);
       ctx.fillStyle='rgba(0,0,0,0.35)';ctx.beginPath();ctx.ellipse(6,8,11,5,0,0,7);ctx.fill();
-      ctx.fillStyle=hl.unit===3?'#3f6b2c':'#3a5f99';ctx.beginPath();ctx.ellipse(0,0,9,4.5,0,0,7);ctx.fill();ctx.fillRect(-18,-1.2,12,2.4);
+      ctx.fillStyle=hl.unit===3?'#3f6b2c':hl.unit===4?'#8a4a1a':'#3a5f99';ctx.beginPath();ctx.ellipse(0,0,9,4.5,0,0,7);ctx.fill();ctx.fillRect(-18,-1.2,12,2.4);
       ctx.fillStyle='#a9c8ff';ctx.beginPath();ctx.ellipse(4,0,3.5,3,0,0,7);ctx.fill();
       ctx.rotate(S.t*28);ctx.strokeStyle='rgba(220,230,240,0.75)';ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(-14,0);ctx.lineTo(14,0);ctx.moveTo(0,-14);ctx.lineTo(0,14);ctx.stroke();
       ctx.restore();
@@ -1139,11 +1297,11 @@ const L1=(()=>{
   let drag=null;
   function renderPreview(ctx,view){
     const w=App.hover,tool=App.tool;if(!w)return;ctx.lineWidth=1.5/view.s;
-    if(tool==='turret'||tool==='sniper'){
-      const k=buildingAt(w);if(k>=0){const b=Bd[k],ok=!b.turret&&!b.sniper;poly(ctx,b.pts);ctx.strokeStyle=ok?'#e8b84a':'#ff6b6b';ctx.stroke();
-        ctx.setLineDash([5,4]);ctx.beginPath();ctx.arc(b.cx,b.cy,tool==='turret'?120:280,0,7);ctx.stroke();ctx.setLineDash([]);}
+    if(tool==='turret'||tool==='sniper'||tool==='hosp'){
+      const k=buildingAt(w);if(k>=0){const b=Bd[k],ok=!b.turret&&!b.sniper&&!b.hosp;poly(ctx,b.pts);ctx.strokeStyle=ok?'#e8b84a':'#ff6b6b';ctx.stroke();
+        if(tool!=='hosp'){ctx.setLineDash([5,4]);ctx.beginPath();ctx.arc(b.cx,b.cy,(tool==='turret'?120:280)*fogK(),0,7);ctx.stroke();ctx.setLineDash([]);}}
     }else if(tool==='heli'){ctx.strokeStyle='#8db6ff';ctx.beginPath();ctx.arc(w.x,w.y,10,0,7);ctx.moveTo(w.x-16,w.y);ctx.lineTo(w.x+16,w.y);ctx.moveTo(w.x,w.y-16);ctx.lineTo(w.x,w.y+16);ctx.stroke();}
-    else if(tool==='test'){ctx.strokeStyle='rgba(242,201,76,0.8)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(w.x,w.y,80,0,7);ctx.stroke();ctx.setLineDash([]);}
+    else if(tool==='test'||tool==='drone'){ctx.strokeStyle='rgba(242,201,76,0.8)';ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(w.x,w.y,tool==='test'?80:60,0,7);ctx.stroke();ctx.setLineDash([]);}
     else if(tool==='bar'&&drag){ctx.strokeStyle='#d0606a';ctx.lineWidth=2/view.s;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(drag.x,drag.y);ctx.lineTo(w.x,w.y);ctx.stroke();ctx.setLineDash([]);
       let n=0;for(let e=0;e<NE;e++)if(segX(drag.x,drag.y,w.x,w.y,nx[ea[e]],ny[ea[e]],nx[eb[e]],ny[eb[e]]))n++;
       ctx.fillStyle='#fff';ctx.font=`${12/view.s}px ${MONO}`;ctx.fillText(`${n} шт · $${n*COST.bar}`,w.x+8/view.s,w.y-10/view.s);}
@@ -1153,10 +1311,18 @@ const L1=(()=>{
 
   // ===================== ВВОД =====================
   function down(w,tool){
+    if(tool==='hosp'){
+      const k=buildingAt(w);if(k<0){toast('Кликните по зданию — в нём развернут полевой госпиталь','warn');return;}
+      const b=Bd[k];if(b.turret||b.sniper||b.hosp){toast('Здание уже занято','warn');return;}
+      if(!spend(S,COST.hosp))return;b.hosp=1;S.hospN++;Snd.play('good');toast('🏥 Полевой госпиталь: задержанных носителей теперь лечат, а не изолируют','good');return;
+    }
+    if(tool==='drone'){if(!spend(S,COST.drone))return;const pol=Bd.find(b=>b.type==='police')||Bd[0];S.drones.push({x:pol.cx,y:pol.cy,tx:w.x,ty:w.y,t:35,scan:1,a:0});toast('🛸 Дрон-сканер: 35 секунд проверяет прохожих в радиусе 60','info');Snd.play('scan');return;}
+    if(tool==='flame'){if(!spend(S,COST.flame))return;S.helis.push({x:-60,y:-60,tx:w.x,ty:w.y,ph:0,t:0,a:0,unit:4});Snd.play('heli');toast('🔥 Огнемётчики в пути: жгут зомби и тела, но задевают прохожих','info');return;}
+    if(tool==='siren'){siren();return;}
     if(tool==='turret'||tool==='sniper'){
       const k=buildingAt(w);
       if(k<0){toast(tool==='turret'?'Кликните по зданию — оно станет пулемётной турелью':'Снайпер ставится на крышу здания','warn');return;}
-      if(Bd[k].turret||Bd[k].sniper){toast('Здесь уже стоит оборона','warn');return;}
+      if(Bd[k].turret||Bd[k].sniper||Bd[k].hosp){toast('Здание уже занято','warn');return;}
       if(!spend(S,COST[tool]))return;Bd[k][tool]=1;Snd.play(tool==='turret'?'gun':'sniper');
       toast(tool==='turret'?'🔫 Турель на позиции. Стрельба привлекает зомби!':'🎯 Снайпер на крыше','good');
     }else if(tool==='heli'){if(!spend(S,COST.heli))return;S.helis.push({x:-60,y:-60,tx:w.x,ty:w.y,ph:0,t:0,a:0});Snd.play('heli');toast('🚁 Вертолёт с отрядом полиции вылетел','info');}
@@ -1165,7 +1331,7 @@ const L1=(()=>{
     else if(tool==='checkpoint')makeCp(w);
     else if(tool==='test'){
       if(!spend(S,COST.test))return;let n=0;
-      eachNear(w.x,w.y,80,j=>{const s=ast[j];if(s===I1||s===I2){const p=s===I2?(silent()?0.75:0.95):(silent()?0.35:0.55);if(Math.random()<p){aflag[j]|=2;amark[j]=45;n++;}}});
+      eachNear(w.x,w.y,80,j=>{const s=ast[j];if(s===I1||s===I2){const p=(s===I2?(silent()?0.75:0.95):(silent()?0.35:0.55))+0.08*upL('tests');if(Math.random()<p){aflag[j]|=2;amark[j]=45;n++;}}});
       fx('scan',w.x,w.y);Snd.play('scan');toast(n?`🧪 Экспресс-тест: выявлено носителей — ${n}. Полиция их задержит.`:'🧪 Экспресс-тест: никого не выявлено (но тесты ошибаются)',n?'warn':'info');
     }else if(tool==='medic'){
       if(!spend(S,COST.medic))return;const h=Bd.find(b=>b.type==='hospital')||Bd[0];
@@ -1192,7 +1358,7 @@ const L1=(()=>{
       else if(spend(S,COST.curfew)){d.curfew=true;toast(`🌙 Комендантский час: жители района «${d.name}» сидят дома (−$3/с)`,'info');}
       S.sel={d:id};
     }else if(name==='station'){
-      const s=ST[id];
+      const s=ST[id];if(S.lockMetro){toast('Сегодня метро закрыто на ремонт','warn');return;}
       if(s.closed){s.closed=false;toast(`🚇 Станция «${s.name}» открыта`,'info');}
       else if(spend(S,COST.station)){s.closed=true;toast(`🚇 Станция «${s.name}» закрыта`,'info');}
       S.sel={st:id};
@@ -1229,35 +1395,54 @@ const L1=(()=>{
       ['bl','Силы','Полиция и санитары в строю',c.units],
       ['t','Изолир.','Выявлено на чекпоинтах и задержано после тестов',c.iso],
       ['y','Бежали','Покинули город через мосты и трассы — кто-то из них может быть носителем',c.esc],
-      ['p','Мутации',Strain.list.length?Strain.names().join(', '):'Вирус пока не мутировал',Strain.list.length]],
-      loss:lossFrac(),lossMax:0.5,lossLabel:'ПОГИБЛИ/ЗОМБИ',clock:`ДЕНЬ ${d} ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}${S.night?' ☾':''}`,money:S.money};
+      ['p','Мутации',Strain.list.length?Strain.names().join(', '):'Вирус пока не мутировал',Strain.list.length]].concat(S.opts.endless?[['y','Волна',`Волна выживания; следующая через ${Math.ceil(S.waveT)} с`,`${S.wave} · ${Math.ceil(S.waveT)}с`]]:[]),
+      loss:lossFrac(),lossMax:S.opts.endless?0.7:0.5,lossLabel:'ПОГИБЛИ/ЗОМБИ',clock:`ДЕНЬ ${d} ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}${S.night?' ☾':''} ${WICON[S.weather]||''}`,money:S.money};
   }
   function summary(){
     const c=S.cnt,st=S.stats;
     return[['Жителей выжило',fmtInt(c.h+c.i1+c.i2-c.units)],['Погибло',fmtInt(c.civDead)],['Стали зомби',fmtInt(c.civZ)],['Уничтожено зомби',st.killed],
       ['Выявлено на чекпоинтах',st.caught],['Задержано после тестов',st.arrested],['Встало мертвецов',st.risen],['Убрано тел санитарами',st.collected],
-      ['Бежали из города',st.escaped],['Пути заражения',(()=>{const R=st.routes||{},N={bite:'укусы',contact:'контакт',bld:'здания',metro:'метро'};return Object.keys(N).map(k=>N[k]+' '+(R[k]||0)).join(' · ');})()],['Жертвы огня турелей',st.friendly],['Потери полиции и санитаров',st.unitsLost],['Мутаций вируса',Strain.list.length],['Длительность',`${Math.floor(S.time/24)+1} дн.`]];
+      ['Бежали из города',st.escaped],['Пути заражения',(()=>{const R=st.routes||{},N={bite:'укусы',contact:'контакт',bld:'здания',metro:'метро'};return Object.keys(N).map(k=>N[k]+' '+(R[k]||0)).join(' · ');})()],['Жертвы огня турелей',st.friendly],['Потери полиции и санитаров',st.unitsLost],['Вылечено в госпиталях',st.cured||0],['Отмечено дронами',st.droneMarks||0],['Мутаций вируса',Strain.list.length],['Длительность',`${Math.floor(S.time/24)+1} дн.`]].concat(S.opts.endless?[['Волн пережито',S.wave]]:[]);
   }
   function carryOut(){const c=S.cnt;return{deadFrac:c.civDead/NCIV,zFrac:c.civZ/NCIV,incFrac:(c.i1+c.i2)/NCIV,leak:S.leak,money:Math.round(S.money*0.5)};}
   return{
     id:1,name:'Город Кедровск',W,H,init,load,save,update,render,down,move,up,click,act,infoHTML,hud,result,summary,carryOut,
     get S(){return S;},
+    miniDraw(g,w,h){
+      g.drawImage(mapCv,0,0,w,h);if(heatCv)g.drawImage(heatCv,0,0,w,h);
+      g.fillStyle='#ff6b6b';for(let i=0;i<NA;i++){const s=ast[i];if((s===ACT||s===LATE)&&isOut(i))g.fillRect(ax[i]/W*w-0.8,ay[i]/H*h-0.8,1.6,1.6);}
+      g.fillStyle='#5ea8ff';for(let i=0;i<NA;i++)if(atype[i]&&ast[i]<ACT)g.fillRect(ax[i]/W*w-0.8,ay[i]/H*h-0.8,1.6,1.6);
+    },
+    news(){
+      const c=S.cnt,hot=D.slice().sort((a,b)=>(b.heat||0)-(a.heat||0))[0],out=[];
+      if(!S.alert)out.push('Кедровск живёт обычной жизнью: пробки на бульваре, давка в метро','Минздрав: сезонный грипп идёт на спад, поводов для тревоги нет','Мэрия обещает отремонтировать мост к осени','В больницах участились жалобы на странный кашель');
+      else{out.push(`Нападения на улицах: в районе «${hot.name}» жители баррикадируются в квартирах`,`Число погибших достигло ${c.dead}. Власти просят не выходить из дома`,'Очевидцы: «Он выглядел совершенно здоровым, а через час начал кашлять…»',`Метрополитен: закрыто станций — ${ST.filter(s=>s.closed).length}`);
+        if(Strain.list.length)out.push(`Вирусологи: штамм мутировал — «${Strain.names().slice(-1)[0]}»`);
+        if(c.esc>20)out.push(`На выездах из города пробки: Кедровск покинули уже ${c.esc} человек`);
+        if(S.stats.cured)out.push(`Полевые госпитали вылечили ${S.stats.cured} носителей на ранней стадии`);}
+      if(S.weather==='rain')out.push('Синоптики: ливень до конца дня');if(S.weather==='fog')out.push('Густой туман: видимость на улицах меньше ста метров');if(S.weather==='heat')out.push('Аномальная жара: в вагонах метро нечем дышать');
+      return out;
+    },
     sample:()=>{const c=S.cnt;return[(c.h+c.i1+c.i2-c.units)/NCIV,(c.act+c.late)/NCIV,c.civDead/NCIV];},
-    dbg:()=>({ax,ay,ast,amode,NA,ST,D,stationXY:ST.map(s=>[s.x,s.y])}),
-    legend:[['#efefef','здоровые (носитель неотличим)'],['#ff8a8a','активные зомби'],['#d13b48','поздние зомби'],['#4d5157','погибшие'],['#5ea8ff','полиция'],['#7cd84a','спецназ'],['#f2c94c','санитары'],['#ff8ad0','крикун'],['#8e1622','громила']],
+    dbg:()=>({ax,ay,ast,amode,atype,NA,ST,D,doors:Bd.map(b=>[b.dx,b.dy]),stationXY:ST.map(s=>[s.x,s.y])}),
+    legend:[['#efefef','здоровые (носитель неотличим)'],['#ff8a8a','активные зомби'],['#d13b48','поздние зомби'],['#4d5157','погибшие'],['#5ea8ff','полиция'],['#7cd84a','спецназ'],['#ff9a3c','огнемётчики'],['#f2c94c','санитары'],['#ff8ad0','крикун'],['#8e1622','громила']],
     tools:[
       {id:'pan',icon:'✋',name:'Обзор',hint:'Перетаскивайте карту. Клик — район или станция метро. Колесо или два пальца — масштаб.'},
-      {id:'turret',icon:'🔫',name:'Турель',cost:COST.turret,hint:'Клик по зданию: пулемёт бьёт по зомби в радиусе. Шум стрельбы приманивает зомби, иногда задевает своих.'},
+      {id:'turret',sep:true,icon:'🔫',name:'Турель',cost:COST.turret,hint:'Клик по зданию: пулемёт бьёт по зомби в радиусе. Шум стрельбы приманивает зомби, иногда задевает своих.'},
       {id:'sniper',icon:'🎯',name:'Снайпер',cost:COST.sniper,hint:'Клик по крыше: дальний точный выстрел раз в 2 секунды.'},
-      {id:'heli',icon:'🚁',name:'Вертолёт',cost:COST.heli,hint:'Клик по точке: вертолёт высадит 6 полицейских. Полиция стреляет и задерживает помеченных носителей.'},
+      {id:'heli',sep:true,icon:'🚁',name:'Вертолёт',cost:COST.heli,hint:'Клик по точке: вертолёт высадит 6 полицейских. Полиция стреляет и задерживает помеченных носителей.'},
       {id:'swat',icon:'🪖',name:'Спецназ',cost:COST.swat,hint:'Клик по точке: 5 бойцов спецназа. Стреляют дальше и точнее полиции, бронежилеты держат 70% укусов.'},
-      {id:'bar',icon:'🧱',name:'Баррикада',cost:COST.bar,unit:'/шт',hint:'Проведите линию поперёк улиц: на каждой перекрытой улице встанет баррикада. Зомби могут её проломить.'},
+      {id:'flame',icon:'🔥',name:'Огнемёт',cost:COST.flame,hint:'Клик по точке: 3 огнемётчика. Жгут зомби по площади и тела, чтобы те не встали. Могут задеть прохожих.'},
+      {id:'bar',sep:true,icon:'🧱',name:'Баррикада',cost:COST.bar,unit:'/шт',hint:'Проведите линию поперёк улиц: на каждой перекрытой улице встанет баррикада. Зомби могут её проломить.'},
       {id:'checkpoint',icon:'🚧',name:'Чекпоинт',cost:COST.checkpoint,hint:'Клик по улице: досмотр ловит 80% носителей с симптомами и 20% без. Очередь — тоже место заражения.'},
-      {id:'test',icon:'🧪',name:'Тест',cost:COST.test,hint:'Клик: экспресс-тест в радиусе 80. Найденные носители помечаются, полиция их задерживает.'},
+      {id:'test',sep:true,icon:'🧪',name:'Тест',cost:COST.test,hint:'Клик: экспресс-тест в радиусе 80. Найденные носители помечаются, полиция их задерживает.'},
+      {id:'drone',icon:'🛸',name:'Дрон',cost:COST.drone,hint:'Клик по точке: дрон 35 секунд висит над районом и помечает носителей в радиусе 60.'},
       {id:'medic',icon:'🚑',name:'Санитары',cost:COST.medic,hint:'4 санитара из больницы: убирают тела, пока те не встали, и тестируют прохожих.'},
-      {id:'curfew',icon:'🌙',name:'Комендант.',cost:COST.curfew,unit:'+3/с',hint:'Клик по району: жители сидят дома, чужих не пускают.'},
+      {id:'hosp',icon:'🏥',name:'Госпиталь',cost:COST.hosp,hint:'Клик по зданию: полевой госпиталь. Задержанных носителей лечат: на ранней стадии в 85% случаев.'},
+      {id:'curfew',sep:true,icon:'🌙',name:'Комендант.',cost:COST.curfew,unit:'+3/с',hint:'Клик по району: жители сидят дома, чужих не пускают.'},
+      {id:'siren',icon:'📢',name:'Сирена',cost:COST.siren,hint:'Все, кто на улице, идут по домам. Разгоняет митинги. Перезарядка 60 с.'},
       {id:'station',icon:'🚇',name:'Метро',cost:COST.station,hint:'Клик по станции: закрыть или открыть. В вагонах вирус распространяется быстрее всего.'},
-      {id:'demolish',icon:'🧹',name:'Снос',hint:'Клик по баррикаде или чекпоинту — убрать.'}
+      {id:'demolish',sep:true,icon:'🧹',name:'Снос',hint:'Клик по баррикаде или чекпоинту — убрать.'}
     ],
     intro:'Нулевой пациент где-то среди 2000 жителей. Найдите и уничтожьте всех заражённых, пока не погибла половина города.'
   };
@@ -1345,7 +1530,7 @@ const L2=(()=>{
     }
   }
   function init(carry){
-    S={seed:(Math.random()*1e9)|0,time:0,money:3000+(carry&&carry.money||0),exported:0,caught:0,evacuated:0,strikes:0,fx:[],sel:-1,won:false};
+    S={seed:(Math.random()*1e9)|0,time:0,money:Math.round(3000*upK())+(carry&&carry.money||0),exported:0,caught:0,evacuated:0,strikes:0,fx:[],sel:-1,won:false};
     const g=gen(S.seed,carry);S.C=g.C;S.E=g.E;S.cap=g.cap;S.pop0=S.C.reduce((a,c)=>a+c.pop0,0);NP=0;renderBg();
   }
   function save(){return{seed:S.seed,time:S.time,money:S.money,exported:S.exported,caught:S.caught,evacuated:S.evacuated,strikes:S.strikes,
@@ -1417,7 +1602,7 @@ const L2=(()=>{
       c.S-=mS;c.E-=mE;safe.S+=mS;safe.Q+=mE*0.6;safe.E+=mE*0.4;S.evacuated+=mS+mE;S.caught+=mE*0.6;
       c.bus=(c.bus||0)+amt/120;while(c.bus>=1){c.bus-=1;S.fx.push({k:'bus',from:c.id,t:0,m:1});}
     }
-    S.money+=dtR*((10+healthy/120000)*Dif().money-upkeep);
+    S.money+=dtR*((10+healthy/120000)*Dif().money*upK()-upkeep*(1-0.15*upL('logistics')));
     if(S.money<0){
       S.money=0;
       const q=S.C.find(c=>c.quar)||S.C.find(c=>c.evac);
@@ -1531,7 +1716,7 @@ const L2=(()=>{
       confirmBox(`Авианалёт на «${c.name}»?`,`Погибнут все ${fmtPeople(aliveOf(c))} человек внутри, включая здоровых. Распространение из города прекратится. Стоимость $${fmtInt(COST.strike)}.`,'Нанести удар',()=>{
         if(!spend(S,COST.strike))return;
         c.D+=c.S+c.E+c.I+c.L+c.Q;c.S=c.E=c.I=c.L=c.Q=0;c.destroyed=true;c.evac=false;c.quar=false;S.strikes++;
-        S.fx.push({k:'strike',x:c.x,y:c.y,t:2.5,m:2.5,seed:Math.random()*6});Snd.play('boom');
+        S.fx.push({k:'strike',x:c.x,y:c.y,t:2.5,m:2.5,seed:Math.random()*6});Snd.play('boom');App.shake=12;
         toast(`💣 «${c.name}» стёрт с карты`,'bad');showInfo();
       });return;
     }
@@ -1584,7 +1769,8 @@ const L2=(()=>{
   function summary(){const t=totals();return[['Население региона',fmtPeople(S.pop0)],['Погибло',fmtPeople(t.D)],['Заражено',fmtPeople(t.E+t.I+t.L)],
     ['Эвакуировано',fmtPeople(S.evacuated)],['Выявлено носителей',fmtPeople(S.caught)],['Авианалётов',S.strikes],['Вывезено вируса самолётами',fmtPeople(S.exported)+' носит.'],['Длительность',`${Math.floor(S.time/24)+1} дн.`]];}
   function carryOut(){const t=totals();return{regionInf:t.E+t.I+t.L,regionDead:t.D,exported:S.exported,money:Math.round(S.money*0.5)};}
-  return{id:2,name:'Регион',W,H,init,load,save,update,render,down,move(){},up(){},hud,result,summary,carryOut,infoHTML,act:(n)=>act(n,S.sel),sample:()=>{const t=totals();return[(t.S+t.E)/S.pop0,(t.I+t.L+0.2*t.E)/S.pop0,t.D/S.pop0];},
+  return{id:2,name:'Регион',W,H,init,load,save,update,render,down,move(){},up(){},hud,result,summary,carryOut,infoHTML,act:(n)=>act(n,S.sel),
+    news(){const cs=S.C.filter(c=>!c.safe&&!c.destroyed).sort((a,b)=>detOf(b)-detOf(a)),t=totals(),out=[`Губернатор: ситуация «под контролем». Выявлено ${fmtPeople(t.I+t.L+0.2*t.E)} заражённых`,'Водители жалуются на многочасовые очереди на блокпостах','Цены на консервы и бензин выросли втрое'];if(cs[0])out.push(`${cs[0].name}: больницы переполнены, на улицах военные`);if(cs.length>1)out.push(`В городе ${cs[cs.length-1].name} пока спокойно, но жители скупают всё подряд`);if(S.strikes)out.push(`Правозащитники требуют расследовать авианалёты: ${S.strikes}`);if(Strain.list.length)out.push(`Вирус мутирует: «${Strain.names().slice(-1)[0]}»`);return out;},sample:()=>{const t=totals();return[(t.S+t.E)/S.pop0,(t.I+t.L+0.2*t.E)/S.pop0,t.D/S.pop0];},
     get S(){return S;},
     legend:[['#e9ecef','люди в пути'],['#ff6b6b','зомби в пути'],['#5fd38a','город чист'],['#e8b84a','есть очаги'],['#7cd84a','войска'],['#2bb3a0','блокпост']],
     tools:[
@@ -1698,7 +1884,7 @@ const L3=(()=>{
   }
   function init(carry){
     if(!raster)buildRaster();
-    S={seed:(Math.random()*1e9)|0,time:0,money:5000+(carry&&carry.money||0),vac:0,fund:0,nukes:0,incomeMul:1,panic:0,sel:-1,fx:[],won:false};
+    S={seed:(Math.random()*1e9)|0,time:0,money:Math.round(5000*upK())+(carry&&carry.money||0),vac:0,fund:0,nukes:0,incomeMul:1,panic:0,sel:-1,fx:[],won:false};
     S.C=CDEF.map((c,i)=>({id:i,name:c[0],x:X(c[1][0]),y:Y(c[1][1]),pop0:c[2],S:c[2],E:0,I:0,L:0,D:0,Q:0,def:c[3]/0.08,hub:!!c[4],port:!!c[5],
       border:false,portClosed:false,airClosed:false,aid:0,nuked:false}));
     S.E=makeRoutes();
@@ -1761,8 +1947,8 @@ const L3=(()=>{
     }
     // вакцина
     const F=FUND[S.fund];
-    if(F.c>0){if(S.money>=F.c*dtR){S.money-=F.c*dtR;S.vac=Math.min(100,S.vac+F.r*dtR*(S.nukes?0.85:1));}else{S.fund=0;toast('💸 Финансирование вакцины остановлено: нет денег','bad');}}
-    S.money+=dtR*80*Dif().money*(healthy/S.pop0)*S.incomeMul*Math.max(0.5,1-0.008*closures);
+    if(F.c>0){if(S.money>=F.c*dtR){S.money-=F.c*dtR;S.vac=Math.min(100,S.vac+F.r*dtR*(S.nukes?0.85:1)*(1+0.12*upL('science')));}else{S.fund=0;toast('💸 Финансирование вакцины остановлено: нет денег','bad');}}
+    S.money+=dtR*80*Dif().money*upK()*(healthy/S.pop0)*S.incomeMul*Math.max(0.5,1-0.008*closures);
     for(let i=0;i<NP;i++){pt[i]+=pv[i]*dtR;if(pt[i]>=1){NP--;pe[i]=pe[NP];pt[i]=pt[NP];pv[i]=pv[NP];pd[i]=pd[NP];pk[i]=pk[NP];i--;}}
     for(const f of S.fx)f.t-=dtR;S.fx=S.fx.filter(f=>f.t>0);
   }
@@ -1855,7 +2041,7 @@ const L3=(()=>{
       confirmBox(`Ядерный удар по стране «${c.name}»?`,`Погибнут все ${fmtPeople(aliveOf(c)*1e6)} жителей. Соседи потеряют 8% населения от осадков, мировая экономика упадёт на 30%, начнётся паника, разработка вакцины замедлится.`,'☢ Нанести удар',()=>{
         c.D+=aliveOf(c)+c.Q;c.S=c.E=c.I=c.L=c.Q=0;c.nuked=true;S.nukes++;S.incomeMul*=0.7;S.panic=60;S.vac=Math.max(0,S.vac-10);
         for(const[a,b]of adj){const o=a===c.id?b:b===c.id?a:-1;if(o<0)continue;const n=S.C[o];for(const k of['S','E','I','L']){const l=n[k]*0.08;n[k]-=l;n.D+=l;}}
-        S.fx.push({k:'nuke',x:c.x,y:c.y,t:3,m:3});Snd.play('nuke');toast(`☢ Ядерный удар по «${c.name}». Мир в ужасе.`,'bad');showInfo();
+        S.fx.push({k:'nuke',x:c.x,y:c.y,t:3,m:3});Snd.play('nuke');App.shake=22;toast(`☢ Ядерный удар по «${c.name}». Мир в ужасе.`,'bad');showInfo();
       });return;
     }
     showInfo();
@@ -1893,13 +2079,14 @@ const L3=(()=>{
       ['g','Здоровы','Здоровы на вид',fmtPeople((alive-t.I-t.L-t.E*0.2)*1e6)],
       ['r','Выявлено','Выявлено заражённых',fmtPeople((t.I+t.L+t.E*0.2)*1e6)],
       ['d','Погибли','Погибшие',fmtPeople(t.D*1e6)],
-      ['bl','Вакцина',`Вакцина (финансирование: ${FUND[S.fund].n})`,S.vac.toFixed(1)+'%'],['p','Мутации',Strain.list.length?Strain.names().join(', '):'Вирус пока не мутировал',Strain.list.length]],
+      ['bl','Вакцина',`Вакцина — ${vacStage(S.vac)} (финансирование: ${FUND[S.fund].n})`,S.vac.toFixed(1)+'%'],['p','Мутации',Strain.list.length?Strain.names().join(', '):'Вирус пока не мутировал',Strain.list.length]],
       loss:lossFrac(),lossMax:0.9,lossLabel:'ЗАРАЖЕНЫ/ПОГИБЛИ',
       clock:`ДЕНЬ ${Math.floor(S.time)+1}`,money:S.money};
   }
   function summary(){const t=totals();return[['Население мира',fmtPeople(S.pop0*1e6)],['Погибло',fmtPeople(t.D*1e6)],['Заражено',fmtPeople((t.E+t.I+t.L)*1e6)],
     ['Выжило здоровых',fmtPeople(t.S*1e6)],['Готовность вакцины',S.vac.toFixed(1)+'%'],['Ядерных ударов',S.nukes],['Длительность',`${Math.floor(S.time)+1} дн.`]];}
-  return{id:3,name:'Земной шар',W,H,init,load,save,update,render,down,move(){},up(){},hud,result,summary,carryOut:()=>({}),infoHTML,act:n=>act(n,S.sel),sample:()=>{const t=totals();return[(t.S+t.E)/S.pop0,(t.I+t.L+0.2*t.E)/S.pop0,t.D/S.pop0];},
+  return{id:3,name:'Земной шар',W,H,init,load,save,update,render,down,move(){},up(){},hud,result,summary,carryOut:()=>({}),infoHTML,act:n=>act(n,S.sel),
+    news(){const cs=S.C.filter(c=>!c.nuked).sort((a,b)=>detOf(b)-detOf(a)),t=totals(),out=[`ВОЗ: в мире выявлено ${fmtPeople((t.I+t.L+0.2*t.E)*1e6)} заражённых`,`${cs[0].name}: введено военное положение`,`Вакцина: этап «${vacStage(S.vac)}», готовность ${S.vac.toFixed(0)}%`,'Биржи падают: торговля сократилась из-за закрытых границ','Учёные со всего мира объединяют данные о штамме'];if(S.nukes)out.push('Мир в шоке после ядерного удара: миллионы людей вышли на протесты');return out;},sample:()=>{const t=totals();return[(t.S+t.E)/S.pop0,(t.I+t.L+0.2*t.E)/S.pop0,t.D/S.pop0];},
     get S(){return S;},
     legend:[['#e9ecef','самолёты и корабли'],['#ff6b6b','зомби на борту'],['#5fd38a','страна чиста'],['#e8b84a','есть очаги'],['#2bb3a0','что-то закрыто'],['#7cd84a','идёт помощь']],
     tools:[
@@ -1920,8 +2107,33 @@ const L3=(()=>{
    ОБОЛОЧКА: камера, ввод, интерфейс, сохранения, переходы между уровнями
    ===================================================================== */
 const LEVELS={1:L1,2:L2,3:L3};
-const App={num:1,lvl:null,speed:1,paused:false,tool:null,hover:null,over:false,carry:{},unlocked:1,started:false,best:{},diff:1,ach:{},hist:[],histT:0,achT:0};
-const APP_VERSION='2.0';
+const App={num:1,lvl:null,speed:1,paused:false,tool:null,hover:null,over:false,carry:{},unlocked:1,started:false,best:{},diff:1,ach:{},hist:[],histT:0,achT:0,shake:0,mode:'campaign',opts:{}};
+// ----- профиль: знаки отличия штаба, улучшения, рекорды (хранится отдельно от партии) -----
+const PROFILE_KEY='karantin_profile_v1';
+App.profile=(()=>{const base={stars:0,upg:{},games:0,wins:0,killed:0,bestWave:0,daily:{},tutDone:false};try{return Object.assign(base,JSON.parse(localStorage.getItem(PROFILE_KEY)||'{}'));}catch(e){return base;}})();
+function saveProfile(){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(App.profile));}catch(e){}}
+function upL(id){return (App.profile&&App.profile.upg[id])||0;}
+function upK(){return 1+0.12*upL('budget');}
+function vacStage(v){return v<25?'изучение штамма':v<50?'прототип':v<75?'клинические испытания':'производство';}
+const UPG=[
+  {id:'budget',n:'Фонд экстренной службы',d:'Стартовый бюджет и доход +12% на всех уровнях',c:[3,6,10]},
+  {id:'turret',n:'Бронебойные ленты',d:'Турели стреляют на 20% чаще',c:[3,6,10]},
+  {id:'tests',n:'Точные тесты',d:'+8% к выявлению тестами, дронами и чекпоинтами',c:[3,6,10]},
+  {id:'heli',n:'Расширенный десант',d:'+1 полицейский в каждом вертолёте',c:[2,5,8]},
+  {id:'bars',n:'Стальные баррикады',d:'Прочность баррикад +40%',c:[2,5,8]},
+  {id:'medic',n:'Полевая медицина',d:'Санитары быстрее на 15%, госпиталь чаще лечит носителей с симптомами',c:[3,6,10]},
+  {id:'logistics',n:'Логистика',d:'Содержание мер в регионе −15%',c:[3,6,10]},
+  {id:'science',n:'Научный корпус',d:'Вакцина разрабатывается на 12% быстрее',c:[3,6,10]}];
+const DMODS=[{id:'nometro',n:'метро закрыто на ремонт'},{id:'night',n:'вспышка начинается ночью'},{id:'rich',n:'двойной стартовый бюджет'},{id:'poor',n:'доход урезан на 40%'},
+  {id:'mutant',n:'вирус уже мутировал дважды'},{id:'crowd',n:'городской праздник, толпы на площади'},{id:'fog',n:'туман весь день'},{id:'twozero',n:'два нулевых пациента'}];
+function dailyInfo(){
+  const d=new Date(),key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  let h=7;for(const ch of key)h=(h*31+ch.charCodeAt(0))|0;
+  const r=mulberry32(h),pool=DMODS.slice(),mods=[];while(mods.length<2)mods.push(pool.splice(Math.floor(r()*pool.length),1)[0]);
+  return{key,seed:Math.abs(h)%1e9+1,mods};
+}
+const MODE_N={campaign:'кампания',survival:'выживание',daily:'вызов дня',sandbox:'песочница'};
+const APP_VERSION='3.0';
 const DIFF=[{n:'Лёгкий',d:'вирус слабее, денег больше, мутации реже',inf:0.7,money:1.4,zspd:0.9,mut:1.4},{n:'Нормальный',d:'как задумано',inf:1,money:1,zspd:1,mut:1},{n:'Кошмар',d:'вирус злее, денег меньше, мутации чаще',inf:1.35,money:0.75,zspd:1.1,mut:0.7}];
 const Dif=()=>DIFF[App.diff]||DIFF[1];
 // ----- достижения -----
@@ -1931,7 +2143,9 @@ const ACH=[
   {id:'clean',n:'Чистая работа',d:'Спасти город, потеряв меньше 50 жителей'},{id:'region',n:'Регион удержан',d:'Победить на уровне «Регион»'},
   {id:'choice',n:'Тяжёлое решение',d:'Нанести авианалёт по городу'},{id:'world',n:'Человечество спасено',d:'Победить на уровне «Земной шар»'},
   {id:'vaccine',n:'Лекарство',d:'Довести вакцину до 100%'},{id:'nonuke',n:'Без единого взрыва',d:'Спасти мир без ядерных ударов'},
-  {id:'mutant',n:'Мутант',d:'Вирус накопил 5 мутаций'},{id:'nightmare',n:'Кошмар наяву',d:'Победить на любом уровне на сложности «Кошмар»'}];
+  {id:'mutant',n:'Мутант',d:'Вирус накопил 5 мутаций'},{id:'nightmare',n:'Кошмар наяву',d:'Победить на любом уровне на сложности «Кошмар»'},
+  {id:'survivor',n:'Несгибаемый',d:'Пережить 5 волн в режиме выживания'},{id:'daily',n:'Вызов принят',d:'Пройти вызов дня'},
+  {id:'medic',n:'Врач от бога',d:'Вылечить 20 носителей в полевых госпиталях'},{id:'hq',n:'Штабная работа',d:'Купить 5 улучшений штаба'}];
 function unlock(id){if(App.ach[id])return;App.ach[id]=Date.now();const a=ACH.find(x=>x.id===id);if(a){toast(`🏆 Достижение: ${a.n}`,'good');Snd.play('good');}saveGame();}
 function checkAch(){
   const S=App.lvl&&App.lvl.S;if(!S)return;
@@ -1939,13 +2153,14 @@ function checkAch(){
   if(App.num===2&&S.strikes>0)unlock('choice');
   if(App.num===3&&S.vac>=100)unlock('vaccine');
   if(Strain.list.length>=5)unlock('mutant');
+  if(App.num===1&&(S.stats.cured||0)>=20)unlock('medic');
 }
 const SAVE_KEY='karantin_save_v1';
 function saveGame(){
   if(!App.lvl||!App.started)return;
   try{
-    const data={diff:App.diff,ach:App.ach,unlocked:App.unlocked,num:App.num,carry:App.carry,sound:Snd.on,best:App.best,strain:Strain.list,
-      snap:App.over?null:{num:App.num,data:App.lvl.save()}};
+    const data={diff:App.diff,ach:App.ach,unlocked:App.unlocked,num:App.num,carry:App.carry,sound:Snd.on,music:Snd.musOn,mode:App.mode,best:App.best,strain:Strain.list,
+      snap:App.over?null:{num:App.num,data:App.lvl.save(),mode:App.mode,opts:App.opts}};
     localStorage.setItem(SAVE_KEY,JSON.stringify(data));
   }catch(e){}
 }
@@ -2013,7 +2228,7 @@ window.addEventListener('resize',resize);
 function buildTools(){
   const box=$('tools');box.innerHTML='';
   App.lvl.tools.forEach((t,idx)=>{
-    const b=document.createElement('button');b.className='tool';b.dataset.tool=t.id;b.title=t.hint;
+    const b=document.createElement('button');b.className='tool'+(t.sep?' sep':'');b.dataset.tool=t.id;b.title=t.hint;
     b.innerHTML=`${idx<9?`<kbd>${idx+1}</kbd>`:''}<span class="i">${t.icon}</span><small>${t.name}</small>${t.cost?`<em>$${t.cost}${t.unit||''}</em>`:''}`;
     b.onclick=()=>{Snd.init();Snd.play('click');
       if(t.instant){App.lvl.act(t.id);return;}
@@ -2047,16 +2262,17 @@ function updateHud(force){
   $('money').textContent='$'+fmtInt(h.money);$('clock').textContent=h.clock;
   $('meterT').textContent=`${h.lossLabel}: ${pct(h.loss)} / ${Math.round(h.lossMax*100)}%`;
   $('meterB').style.width=clamp(h.loss,0,1)*100+'%';$('meterS').style.left=h.lossMax*100+'%';
-  $('lvl').textContent=`УР.${App.num} · ${App.lvl.name}`;
+  $('lvl').textContent=App.mode==='campaign'?`УР.${App.num} · ${App.lvl.name}`:`${MODE_N[App.mode].toUpperCase()} · ${App.lvl.name}`;
   document.querySelectorAll('.tool').forEach(b=>{const t=App.lvl.tools.find(x=>x.id===b.dataset.tool);b.classList.toggle('na',!!(t&&t.cost&&h.money<t.cost));});
   $('bPause').textContent=App.paused?'▶':'⏸';
   document.querySelectorAll('.spd').forEach(b=>b.classList.toggle('on',+b.dataset.s===App.speed));
-  $('bSound').textContent=Snd.on?'🔊':'🔇';
+  $('bSound').textContent=Snd.on?'🔊':'🔇';$('bMusic').classList.toggle('on',Snd.musOn);
   if(App.lvl.infoHTML&&App.lvl.S.sel!==null&&App.lvl.S.sel!==-1&&!$('info').hidden&&!$('info').matches(':hover'))showInfo();
 }
 $('bPause').onclick=()=>{App.paused=!App.paused;updateHud(true);if(App.paused)saveGame();};
 document.querySelectorAll('.spd').forEach(b=>b.onclick=()=>{App.speed=+b.dataset.s;App.paused=false;updateHud(true);});
 $('bSound').onclick=()=>{Snd.init();Snd.on=!Snd.on;updateHud(true);saveGame();};
+$('bMusic').onclick=()=>{Snd.init();Snd.musOn=!Snd.musOn;if(!Snd.musOn)Snd.stopMusic();updateHud(true);saveGame();};
 $('bMenu').onclick=()=>showMenu();
 $('bRestart').onclick=()=>{if(!App.lvl)return;confirmBox(`Перезапустить уровень ${App.num}?`,'Текущий прогресс уровня будет потерян.','Перезапустить',()=>startLevel(App.num));};
 window.addEventListener('keydown',e=>{
@@ -2081,27 +2297,63 @@ const RULES=`<p>Вы руководите экстренной службой. �
 <li><b>Заражение.</b> Скрытая инкубация: носитель неотличим от здорового и уже заразен. Затем симптомы: кашель и едва заметный красный ободок, заразность выше. Потом активный зомби (быстрый, агрессивный) и поздний (медленный, живучий). Передача: укусы, близкий контакт, общие здания и вагоны метро. Погибшие от укусов могут встать.</li>
 <li><b>Вирус мутирует</b> примерно раз в полторы минуты: бегуны, бессимптомность, стайность и другие. Мутации переходят на следующие уровни.</li>
 <li><b>Город.</b> 2000 жителей живут по распорядку: дом, работа, магазины, парки, метро. Ночью зомби опаснее, шум стрельбы их приманивает. В панике люди бегут из города через мосты и уносят вирус в регион.</li>
-<li><b>Инструменты города:</b> турели, снайперы, вертолёт с полицией, баррикады, чекпоинты с очередями, экспресс-тесты, санитары, комендантский час по районам, закрытие станций метро.</li>
+<li><b>Инструменты города:</b> турели, снайперы, вертолёт с полицией, спецназ, огнемётчики, баррикады, чекпоинты с очередями, экспресс-тесты, дрон-сканер, санитары, полевой госпиталь, комендантский час, сирена, закрытие станций метро.</li>
+<li><b>Погода</b> меняется каждый день: в ливень зомби хуже чуют, в тумане оборона бьёт ближе, в жару вирус легче передаётся в помещениях.</li>
 <li><b>Регион:</b> блокпосты, перекрытие ж/д, аэропорты, эвакуация, карантин, войска, оповещение, авианалёт. <b>Земной шар:</b> границы, порты, авиалинии, помощь, вакцина, ядерный удар.</li>
 </ul>
 <div class="keys">ЛКМ или касание — инструмент · колесо или два пальца — масштаб · ПКМ или ✋ — сдвиг, клик ✋ — выбор района<br>1–9 — инструменты · Пробел — пауза · Esc — меню</div>`;
 function showStart(){
   const sv=readSave();
-  if(sv){App.diff=sv.diff??1;App.ach=sv.ach||{};}
-  const cont=sv&&sv.snap?`<button class="big" id="sCont">Продолжить: уровень ${sv.snap.num}</button>`:'';
-  const unl=sv&&sv.unlocked||1;
-  openOv(`<h1>КАРАН<em>ТИН</em></h1><div class="sub">Экстренная служба · протокол «Зомби» · версия ${APP_VERSION}</div>${RULES}
+  if(sv){App.diff=sv.diff??1;App.ach=sv.ach||{};App.unlocked=sv.unlocked||1;App.carry=sv.carry||{};App.best=sv.best||{};Snd.on=sv.sound!==false;Snd.musOn=sv.music!==false;Strain.list=sv.strain||[];}
+  const pr=App.profile,di=dailyInfo(),unl=App.unlocked||1,snap=sv&&sv.snap;
+  openOv(`<h1>КАРАН<em>ТИН</em></h1><div class="sub">Экстренная служба · протокол «Зомби» · версия ${APP_VERSION}</div>
+    <p>Остановите зомби-вирус в городе, регионе и на всём земном шаре. Скрытые носители выглядят здоровыми, вирус мутирует, а у каждого решения есть цена.</p>
+    ${snap?`<button class="big" id="sCont">▶ Продолжить: ${MODE_N[snap.mode||'campaign']}, уровень ${snap.num}</button>`:''}
+    <div class="modes">
+      <div class="mode"><b>Кампания</b><span>Город → регион → земной шар. Проигрыш уровня выпускает вирус на следующий масштаб.</span>
+        <div class="lv">${[1,2,3].map(n=>`<button class="tb" data-l="${n}" ${n>unl?'disabled':''}>${n}. ${LEVELS[n].name}</button>`).join('')}</div>
+        <button class="big" id="sNew">Новая кампания</button></div>
+      <div class="mode"><b>Выживание</b><span>Бесконечный город: волна за волной приходят скрытые носители, вирус мутирует. Рекорд: ${pr.bestWave?'волна '+pr.bestWave:'—'}.</span><button class="big alt" id="sSurv">Играть</button></div>
+      <div class="mode"><b>Вызов дня · ${di.key}</b><span>Один город и одинаковые условия для всех: ${di.mods.map(m=>m.n).join(', ')}. ${pr.daily[di.key]!==undefined?'Ваш лучший результат: '+pr.daily[di.key]+' спасённых.':'Сегодня ещё не пройден.'}</span><button class="big alt" id="sDaily">Принять вызов</button></div>
+      <div class="mode"><b>Песочница</b><span>Бесконечный бюджет: пробуйте любые тактики без давления.</span><button class="big alt" id="sSand">Открыть</button></div>
+    </div>
     <div class="diff">СЛОЖНОСТЬ ${DIFF.map((d,k)=>`<button class="tb ${App.diff===k?'on':''}" data-d="${k}" title="${d.d}">${d.n}</button>`).join('')}<span>${Dif().d}</span></div>
-    ${cont}<button class="big ${cont?'alt':''}" id="sNew">Новая игра</button>
-    <div class="lvlcards">${[1,2,3].map(n=>`<button data-l="${n}" ${n>unl?'disabled':''}><b>${n}. ${LEVELS[n].name}</b><span class="tag">${n<=unl?'открыт':'закрыт'}</span>${sv&&sv.best&&sv.best[n]?`<span class="tag">${sv.best[n]}</span>`:''}</button>`).join('')}</div>
-    <button class="big alt" id="sAch">🏆 Достижения ${Object.keys(App.ach).length}/${ACH.length}</button><button class="big alt" id="sNews">Что нового в ${APP_VERSION}</button>`);
-  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{App.diff=+b.dataset.d;try{const s=readSave()||{};s.diff=App.diff;localStorage.setItem(SAVE_KEY,JSON.stringify(s));}catch(e){}showStart();});
-  $('sAch').onclick=()=>showAch(showStart);$('sNews').onclick=()=>showNews(showStart);
-  if(sv){App.unlocked=sv.unlocked||1;App.carry=sv.carry||{};App.best=sv.best||{};Snd.on=sv.sound!==false;Strain.list=sv.strain||[];}
-  if(cont)$('sCont').onclick=()=>{Snd.init();closeOv();startLevel(sv.snap.num,sv.snap.data);};
-  $('sNew').onclick=()=>{Snd.init();closeOv();App.carry={};Strain.list=[];startLevel(1);};
-  document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{Snd.init();closeOv();startLevel(+b.dataset.l);});
+    <div class="row2"><button class="big alt" id="sHQ">★ Штаб · ${pr.stars}</button><button class="big alt" id="sAch">🏆 ${Object.keys(App.ach).length}/${ACH.length}</button><button class="big alt" id="sHelp">Как играть</button><button class="big alt" id="sNews">Что нового в ${APP_VERSION}</button></div>`);
+  const go=(mode,opts,n=1)=>{Snd.init();closeOv();App.mode=mode;App.opts=opts;if(mode!=='campaign'||n===1&&!App.carry[2])Strain.list=[];startLevel(n);};
+  if(snap)$('sCont').onclick=()=>{Snd.init();closeOv();App.mode=snap.mode||'campaign';App.opts=snap.opts||{};startLevel(snap.num,snap.data);};
+  $('sNew').onclick=()=>{App.carry={};go('campaign',{});};
+  document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>go('campaign',{},+b.dataset.l));
+  $('sSurv').onclick=()=>go('survival',{endless:true});
+  $('sDaily').onclick=()=>{const o={seed:di.seed,daily:di.key};di.mods.forEach(m=>o[m.id]=true);go('daily',o);};
+  $('sSand').onclick=()=>go('sandbox',{sandbox:true});
+  document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{App.diff=+b.dataset.d;try{const x=readSave()||{};x.diff=App.diff;localStorage.setItem(SAVE_KEY,JSON.stringify(x));}catch(e){}showStart();});
+  $('sHQ').onclick=()=>showHQ(showStart);$('sAch').onclick=()=>showAch(showStart);$('sNews').onclick=()=>showNews(showStart);
+  $('sHelp').onclick=()=>{openOv(`<h2>Как играть</h2>${RULES}<button class="big" id="bBack">Назад</button>`);$('bBack').onclick=showStart;};
 }
+function showHQ(back){
+  const pr=App.profile;
+  openOv(`<h2>Штаб · ★ ${pr.stars}</h2><p>Знаки отличия дают за уровни кампании, волны выживания и вызовы дня. Улучшения действуют во всех режимах.</p>
+    <div class="upl">${UPG.map(u=>{const l=upL(u.id),c=u.c[l];return `<div class="${l?'got':''}"><b>${u.n} ${'●'.repeat(l)}${'○'.repeat(3-l)}</b><span>${u.d}</span>${l<3?`<button class="tb" data-u="${u.id}" ${pr.stars<c?'disabled':''}>Улучшить · ★${c}</button>`:'<span>максимум</span>'}</div>`;}).join('')}</div>
+    <div class="stats"><div>Сыграно партий</div><div>${pr.games}</div><div>Побед</div><div>${pr.wins}</div><div>Уничтожено зомби</div><div>${fmtInt(pr.killed)}</div><div>Рекорд выживания</div><div>${pr.bestWave?'волна '+pr.bestWave:'—'}</div></div>
+    <button class="big" id="bBack">Назад</button>`);
+  document.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{const u=UPG.find(x=>x.id===b.dataset.u),l=upL(u.id);if(l>=3||pr.stars<u.c[l])return;pr.stars-=u.c[l];pr.upg[u.id]=l+1;saveProfile();Snd.play('good');
+    if(Object.values(pr.upg).reduce((a,v)=>a+v,0)>=5)unlock('hq');showHQ(back);});
+  $('bBack').onclick=back;
+}
+// ----- обучение для первой партии -----
+const TUT=['Это Кедровск: 2000 жителей, метро, районы. Где-то среди них нулевой пациент — и он выглядит совершенно здоровым.',
+  'Внизу — инструменты. Начните с обороны: <b>турель</b> ставится кликом по зданию, <b>вертолёт</b> высаживает полицию в нужной точке.',
+  'Скрытых носителей находят <b>тесты</b>, <b>дроны</b> и <b>чекпоинты</b>. Помеченных задерживает полиция, а <b>полевой госпиталь</b> их лечит.',
+  'Главные пути вируса — толпы, дома и вагоны метро. Клик инструментом ✋ по району или станции открывает меню: комендантский час, закрытие станции.',
+  'Шкала сверху — потери. Если погибнет или обратится половина города, вирус вырвется в регион. Удачи!'];
+let tutI=-1;
+function startTut(){tutI=0;App.paused=true;showTut();}
+function showTut(){
+  const t=$('tut');if(tutI<0||tutI>=TUT.length){t.hidden=true;return;}t.hidden=false;
+  t.innerHTML=`<div class="tt">ОБУЧЕНИЕ ${tutI+1}/${TUT.length}</div><p>${TUT[tutI]}</p><button class="big" id="tNext">${tutI<TUT.length-1?'Далее':'Начать'}</button><button class="big alt" id="tSkip">Пропустить</button>`;
+  $('tNext').onclick=()=>{tutI++;if(tutI>=TUT.length)endTut();else showTut();};$('tSkip').onclick=endTut;
+}
+function endTut(){tutI=-1;$('tut').hidden=true;App.paused=false;App.profile.tutDone=true;saveProfile();}
 function showMenu(){
   if(!App.started){showStart();return;}
   App.paused=true;saveGame();updateHud(true);
@@ -2122,14 +2374,15 @@ function showLog(back){
   $('bBack').onclick=back;
 }
 function showNews(back){
-  openOv(`<h2>Карантин ${APP_VERSION} · глобальное обновление</h2><ul>
-    <li><b>Сложность:</b> «Лёгкий», «Нормальный» и «Кошмар» — меняют силу вируса, бюджет, скорость зомби и частоту мутаций.</li>
-    <li><b>Особые зомби:</b> Крикун созывает орду со всей округи, Громила выдерживает 8 попаданий и сносит баррикады вчетверо быстрее.</li>
-    <li><b>Спецназ:</b> новый отряд — бойцы стреляют дальше и точнее полиции, бронежилеты держат 70% укусов.</li>
-    <li><b>Случайные события:</b> митинги, блэкауты, гуманитарные конвои и паника на мостах в городе; бунты в карантине, массовое бегство и федеральная помощь в регионе; прорывы в лабораториях, саммиты и контрабанда на карте мира.</li>
-    <li><b>12 достижений</b> с сохранением в браузере.</li>
-    <li><b>График эпидемии</b> на итоговом экране и <b>журнал событий</b> в меню паузы.</li>
-  </ul><button class="big" id="bBack">Назад</button>`);
+  openOv(`<h2>Карантин ${APP_VERSION} · колоссальное обновление</h2><ul>
+    <li><b>Новые режимы:</b> «Выживание» — бесконечные волны носителей и рекорды; «Вызов дня» — один город и модификаторы для всех на дату; «Песочница» — бесконечный бюджет.</li>
+    <li><b>Штаб:</b> знаки отличия за победы и волны, 8 постоянных улучшений по 3 уровня, статистика профиля.</li>
+    <li><b>Новые инструменты города:</b> огнемётчики сжигают зомби и тела, дрон-сканер помечает носителей с воздуха, полевой госпиталь лечит задержанных, сирена загоняет всех по домам.</li>
+    <li><b>Погода:</b> ливень, туман и жара меняют правила каждый день.</li>
+    <li><b>Атмосфера:</b> процедурная музыка нагнетается вместе с эпидемией, бегущая строка новостей, огни окон ночью, тряска от взрывов.</li>
+    <li><b>Удобство:</b> мини-карта города, обучение для первой партии, инструменты сгруппированы.</li>
+    <li><b>Вакцина</b> проходит этапы: изучение, прототип, испытания, производство. Плюс 4 новых достижения.</li>
+  </ul><p class="sub">2.0: сложность, крикуны и громилы, спецназ, события, достижения, график эпидемии, журнал.</p><button class="big" id="bBack">Назад</button>`);
   $('bBack').onclick=back;
 }
 function drawChart(L){
@@ -2146,19 +2399,35 @@ function startLevel(n,snap){
   if(!snap&&n===1)Strain.list=[];
   App.hist=[];App.histT=0;
   App.num=n;App.lvl=LEVELS[n];App.over=false;App.paused=false;App.started=true;$('toasts').innerHTML='';
-  if(snap)App.lvl.load(snap);else App.lvl.init(n===1?null:App.carry[n]);
+  if(snap)App.lvl.load(snap);else App.lvl.init(n===1?Object.assign({},App.opts||{}):App.carry[n]);
+  if(!snap&&n===1){App.profile.games++;saveProfile();}
   App.unlocked=Math.max(App.unlocked,n);
   $('info').hidden=true;resize();fitCam();buildTools();updateHud(true);setLegend();
+  $('mini').hidden=!App.lvl.miniDraw;newsT=1.5;$('tut').hidden=true;
+  if(App.mode==='campaign'&&n===1&&!snap&&!App.profile.tutDone)setTimeout(startTut,500);
   toast(`Уровень ${n}: ${App.lvl.name}. ${App.lvl.intro}`,'info');Snd.play('alarm');
   saveGame();
 }
 function endLevel(res){
-  App.over=true;const n=App.num,L=App.lvl;
+  App.over=true;const n=App.num,L=App.lvl,pr=App.profile,mode=App.mode,win=res==='win';
   if(L.sample)App.hist.push(L.sample());checkAch();
-  if(res==='win'){unlock(['','city','region','world'][n]);if(App.diff===2)unlock('nightmare');if(n===1&&L.S.cnt.civDead+L.S.cnt.civZ<50)unlock('clean');if(n===3&&!L.S.nukes)unlock('nonuke');}
-  const rows=L.summary().map(r=>`<div>${r[0]}</div><div>${r[1]}</div>`).join('')+`<div>Сложность</div><div>${Dif().n}</div>`;
+  if(n===1)pr.killed+=L.S.stats.killed||0;
+  if(win){pr.wins++;unlock(['','city','region','world'][n]);if(App.diff===2)unlock('nightmare');if(n===1&&L.S.cnt.civDead+L.S.cnt.civZ<50)unlock('clean');if(n===3&&!L.S.nukes)unlock('nonuke');}
+  let stars=0,extra='';
+  if(mode==='campaign')stars=win?3+(App.diff===2?1:0):1;
+  else if(mode==='survival'){stars=Math.max(1,L.S.wave-1);if(L.S.wave>pr.bestWave){pr.bestWave=L.S.wave;extra='🏅 Новый рекорд!';}if(L.S.wave>=5)unlock('survivor');}
+  else if(mode==='daily'){const c=L.S.cnt,sc=win?Math.round(c.h+c.i1+c.i2-c.units):0,k=L.S.opts.daily;if(sc>(pr.daily[k]||0)){extra='🏅 Лучший результат дня!';}pr.daily[k]=Math.max(pr.daily[k]||0,sc);if(win){stars=2;unlock('daily');}}
+  pr.stars+=stars;saveProfile();
+  const rows=L.summary().map(r=>`<div>${r[0]}</div><div>${r[1]}</div>`).join('')+`<div>Сложность</div><div>${Dif().n}</div>`+(stars?`<div>Знаки отличия штаба</div><div>+${stars} ★</div>`:'');
   const chart='<canvas id="chart" width="640" height="150"></canvas>';
-  if(res==='win'){
+  if(mode!=='campaign'){
+    const title=mode==='survival'?`Город пал на волне ${L.S.wave}`:mode==='daily'?(win?'Вызов выполнен':'Вызов провален'):(win?'Песочница: вспышка подавлена':'Песочница: город потерян');
+    const sub=mode==='survival'?'Сколько волн выдержит Кедровск в следующий раз?':mode==='daily'?(win?`Спасено жителей: ${pr.daily[L.S.opts.daily]}. Завтра — новый вызов.`:'Попробуйте ещё раз: город и условия те же до конца дня.'):'Без давления бюджета — только тактика.';
+    openOv(`<h2>${title}</h2><p>${sub} ${extra}</p><div class="stats">${rows}</div>${chart}<button class="big" id="eAgain">Ещё раз</button><button class="big alt" id="eHQ">★ Штаб</button><button class="big alt" id="eMain">Главное меню</button>`);
+    $('eAgain').onclick=()=>{closeOv();Strain.list=[];startLevel(1);};$('eMain').onclick=showStart;$('eHQ').onclick=()=>showHQ(()=>endLevelRedraw());
+    App.lastEnd=()=>endLevel(res);drawChart(L);saveGame();return;
+  }
+  if(win){
     App.best[n]='победа';Snd.play('good');
     const next=n<3?`<button class="big alt" id="eNext">Сценарий «а если бы не удалось»: уровень ${n+1}</button>`:'';
     if(n<3){App.carry[n+1]=null;App.unlocked=Math.max(App.unlocked,n+1);}
@@ -2185,6 +2454,24 @@ function endLevel(res){
   }
   drawChart(L);saveGame();
 }
+function endLevelRedraw(){showStart();}
+// ----- мини-карта, новости, музыка, тряска -----
+const mini=$('mini'),mg=mini.getContext('2d');let miniT=0,newsT=2,musT=0;
+const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function drawMini(){
+  const L=App.lvl;if(!L||!L.miniDraw||mini.hidden)return;const w=mini.width,h=mini.height;
+  L.miniDraw(mg,w,h);mg.strokeStyle='#e8b84a';mg.lineWidth=1.5;
+  mg.strokeRect(-cam.ox/cam.s/L.W*w,-cam.oy/cam.s/L.H*h,cam.cw/cam.s/L.W*w,cam.ch/cam.s/L.H*h);
+}
+function miniJump(e){const L=App.lvl;if(!L)return;const r=mini.getBoundingClientRect(),wx=(e.clientX-r.left)/r.width*L.W,wy=(e.clientY-r.top)/r.height*L.H;cam.ox=cam.cw/2-wx*cam.s;cam.oy=cam.ch/2-wy*cam.s;clampCam();}
+mini.addEventListener('pointerdown',e=>{mini.setPointerCapture(e.pointerId);miniJump(e);});
+mini.addEventListener('pointermove',e=>{if(e.buttons)miniJump(e);});
+function tickExtras(rdt){
+  const L=App.lvl;if(!L||!App.started)return;
+  miniT-=rdt;if(miniT<=0){miniT=0.25;drawMini();}
+  if(!App.paused&&!App.over){newsT-=rdt;if(newsT<=0&&L.news){newsT=26;const list=L.news();if(list.length){const m=list[Math.random()*list.length|0],el=$('newsT');el.style.animation='none';el.textContent=m;void el.offsetWidth;el.style.animation=`news ${Math.max(14,m.length*0.2)}s linear`;}}}
+  musT-=rdt;if(musT<=0){musT=0.25;if(Snd.musOn&&Snd.on&&Snd.ctx&&Snd.ctx.state==='running'&&!App.paused&&!App.over&&!ovOpen){Snd.startMusic();const h=L.hud();Snd.musicTick(clamp(h.loss/h.lossMax,0,1));}else Snd.stopMusic();}
+}
 
 // ----- главный цикл: фиксированные подшаги симуляции, отрисовка каждый кадр -----
 let lastT=performance.now(),autoT=0;
@@ -2199,11 +2486,12 @@ function frame(now){
   }
   ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle='#0a0e11';ctx.fillRect(0,0,cv.width,cv.height);
   if(L&&L.S){
-    ctx.setTransform(cam.dpr*cam.s,0,0,cam.dpr*cam.s,cam.dpr*cam.ox,cam.dpr*cam.oy);
+    let shx=0,shy=0;if(App.shake>0){if(!reduceMotion){shx=(Math.random()-0.5)*App.shake;shy=(Math.random()-0.5)*App.shake;}App.shake=Math.max(0,App.shake-rdt*25);}
+    ctx.setTransform(cam.dpr*cam.s,0,0,cam.dpr*cam.s,cam.dpr*(cam.ox+shx),cam.dpr*(cam.oy+shy));
     L.render(ctx,cam,rdt);
-    if(App.paused&&!ovOpen){ctx.setTransform(cam.dpr,0,0,cam.dpr,0,0);ctx.fillStyle='rgba(0,0,0,0.35)';ctx.fillRect(0,0,cam.cw,cam.ch);ctx.fillStyle='#fff';ctx.font='bold 26px system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('⏸ ПАУЗА',cam.cw/2,cam.ch/2);}
+    if(App.paused&&!ovOpen&&$('tut').hidden){ctx.setTransform(cam.dpr,0,0,cam.dpr,0,0);ctx.fillStyle='rgba(0,0,0,0.35)';ctx.fillRect(0,0,cam.cw,cam.ch);ctx.fillStyle='#fff';ctx.font='bold 26px system-ui,sans-serif';ctx.textAlign='center';ctx.fillText('⏸ ПАУЗА',cam.cw/2,cam.ch/2);}
   }
-  updateHud(false);
+  updateHud(false);tickExtras(rdt);
   requestAnimationFrame(frame);
 }
 resize();
